@@ -59,14 +59,13 @@
 		</dependency>
 		<!-- Ends Dependency for Servlet api -->
 
-		<!-- Dependency for Hibernate session Factory -->
+		<!-- Cassandra Data -->
 		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-			<version>1.4</version>
-		</dependency>
-
-		<!-- Ends Dependency for Hibernate session Factory -->
+        	<groupId>org.springframework.data</groupId>
+        	<artifactId>spring-data-cassandra</artifactId>
+        	<version>1.4.4.RELEASE</version>
+    	</dependency>
+		<!-- END -->
 
 		<!-- Dependencies for aspect oriented features -->
 		<dependency>
