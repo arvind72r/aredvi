@@ -46,14 +46,6 @@
 		</dependency>
 
 
-		<!-- Tiles Dependecy -->
-
-		<dependency>
-			<groupId>org.apache.tiles</groupId>
-			<artifactId>tiles-extras</artifactId>
-			<version>2.2.2</version>
-		</dependency>
-		<!-- End -->
 		<!-- Dependency for Servlet api -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -105,13 +97,6 @@
 		</dependency>
 		<!-- Ends Dependencies for aspect oriented features -->
 
-		<!-- Dependency for MySQL connector -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.29</version>
-		</dependency>
-		<!-- Ends Dependency for MySQL connector -->
 
 		<!-- Spring Framework dependencies -->
 		<dependency>
@@ -147,62 +132,6 @@
 			<version>4.0.2.RELEASE</version>
 		</dependency>
 		<!-- Ends Spring Framework dependencies -->
-
-		<!-- Hibernate Dependencies -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>4.3.3.Final</version>
-		</dependency>
-
-		<!-- for JPA, use hibernate-entitymanager instead of hibernate-core -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.3.4.Final</version>
-		</dependency>
-
-		<!-- optional -->
-
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-osgi</artifactId>
-			<version>4.3.4.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-envers</artifactId>
-			<version>4.3.4.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-c3p0</artifactId>
-			<version>4.3.4.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-proxool</artifactId>
-			<version>4.3.4.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-infinispan</artifactId>
-			<version>4.3.4.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-ehcache</artifactId>
-			<version>4.3.4.Final</version>
-		</dependency>
-		<!-- Form validator dependency -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>5.1.0.Final</version>
-		</dependency>
-		<!-- Ends Hibernate Dependencies -->
-
-		<!-- Jsp Dependency -->
 
 		<!-- Apache commons Dependency -->
 		<dependency>
