@@ -1,5 +1,5 @@
 package com.aredvi.dao.interfaces;
 
-public interface AredviDAO {
+public interface UserDAO {
 	
 }
