@@ -2,9 +2,9 @@ package com.aredvi.dao.impl;
 
 import org.springframework.stereotype.Repository;
 
-import com.aredvi.dao.interfaces.AredviDAO;
+import com.aredvi.dao.interfaces.UserDAO;
 
 @Repository
-public class AredviDAOImpl implements AredviDAO{
+public class UserDAOImpl implements UserDAO{
 	
 }

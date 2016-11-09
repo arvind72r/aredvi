@@ -1,8 +1,8 @@
-package com.controller;
+package com.aredvi.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class AredviController {
+public class UserController {
 	
 }
