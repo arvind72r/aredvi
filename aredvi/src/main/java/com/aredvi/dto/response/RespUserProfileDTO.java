@@ -1,9 +1,6 @@
-package com.aredvi.entity;
+package com.aredvi.dto.response;
 
-import org.springframework.data.cassandra.mapping.Table;
-
-@Table
-public class User {
+public class RespUserProfileDTO {
 	private String id;
 	private String name;
 	private String type;
@@ -32,4 +29,13 @@ public class User {
 		this.type = type;
 	}
 
+	public RespUserProfileDTO(String id, String name, String type) {
+		this.id = id;
+		this.name = name;
+		this.type = type;
+	}
+
+	public RespUserProfileDTO() {
+
+	}
 }

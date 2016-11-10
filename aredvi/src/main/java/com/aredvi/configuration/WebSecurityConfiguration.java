@@ -1,4 +1,4 @@
-package com.aredvi;
+package com.aredvi.configuration;
 
 import java.util.ArrayList;
 import java.util.HashSet;

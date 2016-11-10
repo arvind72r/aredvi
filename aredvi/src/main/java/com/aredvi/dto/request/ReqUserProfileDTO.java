@@ -1,35 +1,33 @@
-package com.aredvi.entity;
+package com.aredvi.dto.request;
 
-import org.springframework.data.cassandra.mapping.Table;
-
-@Table
-public class User {
+public class ReqUserProfileDTO {
 	private String id;
 	private String name;
 	private String type;
-
 	public String getId() {
 		return id;
 	}
-
 	public void setId(String id) {
 		this.id = id;
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public String getType() {
 		return type;
 	}
-
 	public void setType(String type) {
 		this.type = type;
 	}
-
+	public ReqUserProfileDTO(String id, String name, String type) {
+		this.id = id;
+		this.name = name;
+		this.type = type;
+	}
+	public ReqUserProfileDTO(){
+		
+	}
 }

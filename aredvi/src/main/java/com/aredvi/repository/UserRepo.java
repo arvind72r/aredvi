@@ -1,9 +1,17 @@
 package com.aredvi.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.List;
+
+import org.springframework.data.cassandra.repository.CassandraRepository;
 
 import com.aredvi.entity.User;
 
-public interface UserRepo extends CrudRepository<User, String> {
+public interface UserRepo extends CassandraRepository<User> {
+
+	User findById(String usrId);
+
+	List<User> findByName(String type);
+
+	List<User> findByType(String type);
 
 }
