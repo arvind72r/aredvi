@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:s="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+	<s:global-method-security pre-post-annotations="enabled" secured-annotations="enabled" proxy-target-class="true"/>
+	
+	<!-- create a custom entry point to prevent auto triggering -->
+	<s:http use-expressions="true" auto-config="false" entry-point-ref="restAuthenticationEntryPoint" >
+
+		<!-- Custom Filters -->
+		<s:custom-filter ref="preAuthFilter" position="PRE_AUTH_FILTER"/>
+		<s:custom-filter ref="customRestAuthFilter" position="FORM_LOGIN_FILTER"/>
+
+		<!-- intercept URLS -->
+		<s:intercept-url pattern="/index.jsp" access="permitAll"/>
+		<s:intercept-url pattern="/service/**" access="permitAll"/>
+		<s:logout/>
+	</s:http>
+	
+	<bean id="preAuthFilter" class="com.aredvi.security.PreAuthFilter" >
+		<property name="authenticationManager" ref="preAuthAuthenticationManager" />
+	</bean>
+	
+	<bean id="customRestAuthFilter" class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
+		<property name="authenticationManager" ref="restAuthAuthenticationManager" />
+		<property name="authenticationSuccessHandler" ref="restAuthSuccessHandler" />
+		<property name="authenticationFailureHandler" ref="restAuthFailureHandler" />
+	</bean>
+	
+	<bean id="restAuthSuccessHandler" class="com.aredvi.security.RestAuthSuccessHandler" />
+	<bean id="restAuthFailureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler" />
+ 	
+	<bean id="preAuthProvider" class="com.aredvi.security.PreAuthProvider">
+		<property name="preAuthenticatedUserDetailsService">
+			<bean id="userDetailsServiceWrapper" class="org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper">
+				<property name="userDetailsService" ref="customPreAuthUserDetailsService" />
+			</bean>
+		</property>
+	</bean>
+ 	
+ 	<s:authentication-manager alias="preAuthAuthenticationManager" >
+		<s:authentication-provider ref="preAuthProvider" />
+	</s:authentication-manager>
+	
+	<bean id="md5" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
+	<bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+	
+	<bean id="restAuthAuthenticationManager" class="org.springframework.security.authentication.ProviderManager">
+		<constructor-arg>
+			<list>
+				<bean class="org.springframework.security.authentication.dao.DaoAuthenticationProvider" 
+						p:userDetailsService-ref="userLoginService" 
+						p:passwordEncoder-ref="md5">
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+
+</beans>
+
