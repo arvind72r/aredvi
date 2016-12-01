@@ -3,6 +3,7 @@ package com.aredvi.entity;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.cassandra.core.Ordering;
 import org.springframework.cassandra.core.PrimaryKeyType;
 import org.springframework.data.cassandra.mapping.Column;
 import org.springframework.data.cassandra.mapping.PrimaryKeyColumn;
@@ -13,10 +14,10 @@ import com.datastax.driver.core.utils.UUIDs;
 @Table("authority")
 public class Authority {
 	
-	@PrimaryKeyColumn(name = "id",ordinal = 1,type = PrimaryKeyType.CLUSTERED)
-	private UUID id = UUIDs.timeBased();
+	@PrimaryKeyColumn(name = "id",ordinal = 0,type = PrimaryKeyType.PARTITIONED)
+	private UUID id;
 	
-	@Column(value = "role")
+	@PrimaryKeyColumn(name = "role",ordinal = 1,type = PrimaryKeyType.CLUSTERED, ordering = Ordering.DESCENDING)
 	private String role;
 	
 	@Column(value = "authorities")
@@ -45,5 +46,20 @@ public class Authority {
 	public void setAuthorities(List<String> authorities) {
 		this.authorities = authorities;
 	}
+
+	public Authority(UUID id, String role, List<String> authorities) {
+		this.id = id;
+		this.role = role;
+		this.authorities = authorities;
+	}
 	
+	public Authority(String role, List<String> authorities) {
+		this.id = UUIDs.timeBased();
+		this.role = role;
+		this.authorities = authorities;
+	}
+
+	public Authority(){
+		
+	}
 }

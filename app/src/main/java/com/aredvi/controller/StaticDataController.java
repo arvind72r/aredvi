@@ -5,6 +5,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/static")
-public class StaticDataController {
+public class StaticDataController extends AredviController{
 
 }

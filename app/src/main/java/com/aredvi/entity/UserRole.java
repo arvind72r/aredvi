@@ -2,6 +2,7 @@ package com.aredvi.entity;
 
 import java.util.UUID;
 
+import org.springframework.cassandra.core.Ordering;
 import org.springframework.cassandra.core.PrimaryKeyType;
 import org.springframework.data.cassandra.mapping.Column;
 import org.springframework.data.cassandra.mapping.PrimaryKeyColumn;
@@ -12,21 +13,15 @@ import com.datastax.driver.core.utils.UUIDs;
 @Table("userrole")
 public class UserRole {
 	
-	@PrimaryKeyColumn(name = "id",ordinal = 1,type = PrimaryKeyType.CLUSTERED)
-	private UUID id = UUIDs.timeBased();
+	@PrimaryKeyColumn(name = "id",ordinal = 0,type = PrimaryKeyType.PARTITIONED)
+	private UUID id;
 	
-	@Column(value = "user_id")
-	private String userId;
+	@PrimaryKeyColumn(name = "user_id",ordinal = 1,type = PrimaryKeyType.CLUSTERED, ordering = Ordering.DESCENDING)
+	private UUID userId;
 	
 	@Column(value = "role")
 	private String role;
 	
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
 	public String getRole() {
 		return role;
 	}
@@ -39,4 +34,26 @@ public class UserRole {
 	public void setId(UUID id) {
 		this.id = id;
 	}
+	
+	public UUID getUserId() {
+		return userId;
+	}
+	public void setUserId(UUID userId) {
+		this.userId = userId;
+	}
+	public UserRole(UUID id, UUID userId, String role) {
+		this.id = id;
+		this.userId = userId;
+		this.role = role;
+	}
+	
+	public UserRole(UUID userId, String role) {
+		this.id  = UUIDs.timeBased();
+		this.userId = userId;
+		this.role = role;
+	}
+	public UserRole(){
+		
+	}
+	
 }

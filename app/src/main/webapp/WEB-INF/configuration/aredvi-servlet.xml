@@ -25,6 +25,8 @@
 
 
 	<context:component-scan base-package="com.aredvi" /> 
+	<cassandra:repositories base-package="com.aredvi.repository" />
+  	<cassandra:mapping entity-base-packages="com.aredvi.entity" />
 	<context:annotation-config />
 	<mvc:annotation-driven />
 	<mvc:resources location="/WEB-INF/utils/" mapping="/utils/**" />
@@ -39,11 +41,11 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
-	<!-- <bean id="messageSource"
+	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basename" value="/WEB-INF/properties/localization/messages" />
 		<property name="defaultEncoding" value="UTF-8" />
-	</bean> -->
+	</bean> 
 
 	<!-- <bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -71,7 +73,7 @@
 			</props>
 		</property>
 	</bean> -->
-  <context:property-placeholder  location="classpath:cassandra.properties" />
+  <context:property-placeholder  location="classpath:cassandra.properties,classpath:log4j.properties" />
 
   <!-- REQUIRED: The Cassandra Cluster -->
   <cassandra:cluster id="cassandraCluster" contact-points="${cassandra.contactpoints}"  port="${cassandra.port}" />
@@ -81,16 +83,11 @@
   <cassandra:session id="cassandraSession" keyspace-name="${cassandra.keyspace}" />
 
   <!-- REQUIRED: The Default Cassandra Converter used by CassandraTemplate -->
-  <cassandra:converter /> 
+  <cassandra:converter />  
 
   <!-- REQUIRED: The Cassandra Template is the building block of all Spring Data Cassandra -->
   <cassandra:template id="cqlTemplate" />
 
-  <!-- OPTIONAL: If you are using Spring Data Cassandra Repositories, add 
-    your base packages to scan here -->
-  <cassandra:repositories base-package="com.aredvi.repository" />
-  <cassandra:mapping entity-base-packages="com.aredvi.entity" />
-  
 	<bean id="velocityEngine"
 		class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
 		<property name="velocityProperties">

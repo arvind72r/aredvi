@@ -8,7 +8,7 @@ import com.aredvi.entity.Authority;
 
 public interface AuthorityRepo extends CassandraRepository<Authority> {
 
-	@Query("Select * from authority where role=?0")
+	@Query("Select * from authority where role=?0  ALLOW FILTERING")
 	Authority finByRole(String role);
 
 }

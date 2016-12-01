@@ -1,8 +1,10 @@
 package com.aredvi.entity;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
+import org.springframework.cassandra.core.Ordering;
 import org.springframework.cassandra.core.PrimaryKeyType;
 import org.springframework.data.cassandra.mapping.Column;
 import org.springframework.data.cassandra.mapping.PrimaryKeyColumn;
@@ -13,10 +15,10 @@ import com.datastax.driver.core.utils.UUIDs;
 @Table("userlogin")
 public class UserLogin {
 	
-	@PrimaryKeyColumn(name = "id",ordinal = 1,type = PrimaryKeyType.CLUSTERED)
-	private UUID id =UUIDs.timeBased();
+	@PrimaryKeyColumn(name = "id",ordinal = 0,type = PrimaryKeyType.PARTITIONED)
+	private UUID id;
 	
-	@Column(value = "user_name")
+	@PrimaryKeyColumn(name = "user_name",ordinal = 1,type = PrimaryKeyType.CLUSTERED, ordering = Ordering.DESCENDING)
 	private String userName;
 	
 	@Column(value = "password")
@@ -39,6 +41,9 @@ public class UserLogin {
 	
 	@Column(value = "auth_provider")
 	private String authProvider;
+	
+	@Column(value = "roles")
+	private List<String> roles;
 	
 	public UUID getId() {
 		return id;
@@ -95,4 +100,40 @@ public class UserLogin {
 		this.authProvider = authProvider;
 	}
 	
+	public List<String> getRoles() {
+		return roles;
+	}
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
+	}
+	public UserLogin(UUID id, String userName, String password, String authId, Date createdOn, Date updatedOn,
+			boolean isLock, boolean isVerified, String authProvider, List<String> roles) {
+		this.id = id;
+		this.userName = userName;
+		this.password = password;
+		this.authId = authId;
+		this.createdOn = createdOn;
+		this.updatedOn = updatedOn;
+		this.isLock = isLock;
+		this.isVerified = isVerified;
+		this.authProvider = authProvider;
+		this.roles = roles;
+	}
+	
+	public UserLogin(String userName, String password, String authId, Date createdOn, Date updatedOn, boolean isLock,
+			boolean isVerified, String authProvider, List<String> roles) {
+		this.id = UUIDs.timeBased();
+		this.userName = userName;
+		this.password = password;
+		this.authId = authId;
+		this.createdOn = createdOn;
+		this.updatedOn = updatedOn;
+		this.isLock = isLock;
+		this.isVerified = isVerified;
+		this.authProvider = authProvider;
+		this.roles = roles;
+	}
+	public UserLogin(){
+		this.id = UUIDs.timeBased();
+	}
 }

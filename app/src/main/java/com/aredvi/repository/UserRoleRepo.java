@@ -11,7 +11,7 @@ import com.aredvi.entity.UserRole;
 
 public interface UserRoleRepo extends CassandraRepository<UserRole>{
 
-	@Query("Select * from userrole where userid=?0")
+	@Query("Select * from userrole where user_id=?0 ALLOW FILTERING")
 	public Set<UserRole> findByUserId(UUID id);
 
 }

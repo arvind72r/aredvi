@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.cassandra.core.CassandraOperations;
 import org.springframework.stereotype.Repository;
 
 import com.aredvi.dao.interfaces.UserDAO;
@@ -17,9 +16,6 @@ import com.aredvi.repository.UserRepo;
 @Repository("userDAO")
 public class UserDAOImpl implements UserDAO {
 	
-	@Autowired
-	private CassandraOperations cassandraOperations;
-
 
 	@Autowired
 	UserRepo userRepo;
@@ -29,7 +25,7 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public User addUserProfile(User user) throws AredviException {
-		return cassandraOperations.insert(user);
+		return userRepo.save(user);
 	}
 
 	@Override
@@ -60,6 +56,11 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public UserLogin createLogin(UserLogin usrLogin) throws AredviException {
 		return userLoginRepo.save(usrLogin);
+	}
+
+	@Override
+	public UserLogin findByUserName(String userName) throws AredviException {
+		return userLoginRepo.findByUserName(userName);
 	}
 
 }

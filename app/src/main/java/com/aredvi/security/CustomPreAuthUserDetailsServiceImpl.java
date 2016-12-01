@@ -16,19 +16,14 @@ import org.springframework.stereotype.Service;
 
 import com.aredvi.entity.Authority;
 import com.aredvi.entity.UserLogin;
-import com.aredvi.entity.UserRole;
 import com.aredvi.repository.AuthorityRepo;
 import com.aredvi.repository.UserLoginRepo;
-import com.aredvi.repository.UserRoleRepo;
 
 @Service("customPreAuthUserDetailsService")
 public class CustomPreAuthUserDetailsServiceImpl implements UserDetailsService {
 	
 	@Autowired
 	UserLoginRepo userLoginRepo;
-	
-	@Autowired
-	UserRoleRepo userRoleRepo;
 	
 	@Autowired
 	AuthorityRepo authorityRepo;
@@ -45,11 +40,9 @@ public class CustomPreAuthUserDetailsServiceImpl implements UserDetailsService {
 			} else if(password.length()<=0){
 				throw new UsernameNotFoundException("Password is blank");
 			}
-			Set<UserRole> roles = new HashSet<UserRole>();
 			Set<Authority> vAuthority = new HashSet<Authority>();
-			roles = userRoleRepo.findByUserId(userLogin.getId());
-			for(UserRole role : roles){
-				vAuthority.add(authorityRepo.finByRole(role.getRole()));
+			for(String role : userLogin.getRoles()){
+				vAuthority.add(authorityRepo.finByRole(role));
 			}
 			boolean enabled = true;
 			boolean accountNonExpired = true;
@@ -57,16 +50,16 @@ public class CustomPreAuthUserDetailsServiceImpl implements UserDetailsService {
 			boolean accountNonLocked = true;
 			return new User(userLogin.getUserName(), userLogin.getPassword(), 
 					enabled, accountNonExpired, credentialsNonExpired, accountNonLocked,
-					getAuthorities(roles,vAuthority));
+					getAuthorities(userLogin.getRoles(),vAuthority));
 		} else {
 			throw new UsernameNotFoundException("could not find the user '" + username + "'");
 		}
 	}
 
-	public List<GrantedAuthority> getAuthorities(Set<UserRole> roles, Set<Authority> authority){
+	public List<GrantedAuthority> getAuthorities(List<String> roles, Set<Authority> authority){
 		List<GrantedAuthority> vAuthorities = new ArrayList<GrantedAuthority>();
-		for(UserRole role: roles){
-			vAuthorities.add(new SimpleGrantedAuthority(role.getRole()));
+		for(String role: roles){
+			vAuthorities.add(new SimpleGrantedAuthority(role));
 		}
 		if(authority != null && !authority.isEmpty()) {
 			for(Authority rap : authority) {

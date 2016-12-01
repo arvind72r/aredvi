@@ -23,4 +23,6 @@ public interface UserDAO {
 
 	UserLogin createLogin(UserLogin usrLogin) throws AredviException;
 
+	UserLogin findByUserName(String userName) throws AredviException;
+
 }

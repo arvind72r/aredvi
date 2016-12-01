@@ -3,7 +3,9 @@ package com.aredvi.services.interfaces;
 import java.util.List;
 import java.util.UUID;
 
+import com.aredvi.dto.request.ReqLoginDTO;
 import com.aredvi.dto.request.ReqUserProfileDTO;
+import com.aredvi.dto.response.RespLoginDTO;
 import com.aredvi.dto.response.RespUserProfileDTO;
 import com.aredvi.entity.UserLogin;
 import com.aredvi.exceptions.AredviException;
@@ -23,5 +25,9 @@ public interface UserService {
 	UserLogin findByAuthId(String authid) throws AredviException;
 
 	UserLogin createLogin(UserLogin usrLogin) throws AredviException;
+
+	RespLoginDTO createLogin(ReqLoginDTO reqLoginDTO) throws AredviException;
+
+	UserLogin findByUserName(String userName) throws AredviException;
 
 }
