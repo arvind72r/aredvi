@@ -1,6 +1,5 @@
 package com.aredvi.controller;
 
-import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -54,16 +53,5 @@ public class DoctorController {
 		resp.setResponseData(respUserProfileDTO);
 		return resp;
 	}
-
-	@Secured("ROLE_USER")
-	@RequestMapping(value = "/searchbyname", method = RequestMethod.GET)
-	public ResponseFormatter<List<RespDoctorProfileDTO>> searchUserByName(@RequestParam String name)
-			throws AredviException {
-		List<RespDoctorProfileDTO> profiles = doctorService.searchDoctorByName(name);
-		ResponseFormatter<List<RespDoctorProfileDTO>> resp = new ResponseFormatter<List<RespDoctorProfileDTO>>();
-		resp.setResponseData(profiles);
-		return resp;
-	}
-	
 
 }

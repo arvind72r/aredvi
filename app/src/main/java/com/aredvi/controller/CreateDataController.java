@@ -5,8 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.data.cassandra.core.CassandraOperations;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,24 +14,21 @@ import com.aredvi.entity.Authority;
 import com.aredvi.entity.UserLogin;
 import com.aredvi.entity.UserRole;
 import com.aredvi.exceptions.AredviException;
+import com.aredvi.repository.CreateTables;
 
 
 @RestController
-@PropertySource(value = {"classpath:createtable.properties"})
 @RequestMapping(value = "/datas")
 public class CreateDataController extends AredviController {
-	@Autowired
-	private Environment environment;
-	
 	@Autowired
 	private CassandraOperations cassandraOperations;
 	
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public void createTables() throws AredviException {
-		cassandraOperations.execute(environment.getProperty("createtable.authority"));
-		cassandraOperations.execute(environment.getProperty("createtable.user"));
-		cassandraOperations.execute(environment.getProperty("createtable.userlogin"));
-		cassandraOperations.execute(environment.getProperty("createtable.userrole"));
+		cassandraOperations.execute(CreateTables.AUTHORITY);
+		cassandraOperations.execute(CreateTables.USER);
+		cassandraOperations.execute(CreateTables.USER_LOGIN);
+		cassandraOperations.execute(CreateTables.DOCTOR);
 	}
 	
 	@RequestMapping(value = "/insertvalues", method = RequestMethod.GET)
@@ -47,7 +42,9 @@ public class CreateDataController extends AredviController {
 		List<String> roles = new ArrayList<String>(); 
 		roles.add("ROLE_USER");
 		
-		UserLogin userLogin = new UserLogin("vishnu","5270c8cea4f7b2382dc0e31ebff02bf3","123",new Date(),new Date(),false,true,"aredvi",roles);
+		UserLogin userLogin = new UserLogin("vishnu","5270c8cea4f7b2382dc0e31ebff02bf3","123",
+				new Date(),new Date(),false,true,"aredvi",roles);
+		
 		cassandraOperations.insert(userLogin);
 		
 		UserRole userRole = new UserRole(userLogin.getId(),"ROLE_USER");

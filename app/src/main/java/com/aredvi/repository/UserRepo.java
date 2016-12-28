@@ -11,13 +11,13 @@ import com.aredvi.entity.User;
 
 public interface UserRepo extends CassandraRepository<User> {
 	
-	@Query("Select * from user where id=?0")
+	@Query("Select * from user where id=?0 ALLOW FILTERING")
 	User findById(UUID usrId);
 
-	@Query("Select * from user where name=?0")
+	@Query("Select * from user where name=?0 ALLOW FILTERING")
 	List<User> findByName(String type);
 
-	@Query("Select * from user where type=?0")
+	@Query("Select * from user where type=?0 ALLOW FILTERING")
 	List<User> findByType(String type);
 
 }

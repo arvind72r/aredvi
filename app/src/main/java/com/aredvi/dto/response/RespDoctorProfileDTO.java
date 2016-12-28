@@ -34,11 +34,13 @@ public class RespDoctorProfileDTO {
 
 	private String profile;
 
-	private boolean calendar;
+	private String calendar;
 
 	private String photo;
 
 	private Map<String, String> documents;
+	
+	private boolean profileDelted;
 
 	public UUID getId() {
 		return id;
@@ -152,11 +154,11 @@ public class RespDoctorProfileDTO {
 		this.profile = profile;
 	}
 
-	public boolean isCalendar() {
+	public String getCalendar() {
 		return calendar;
 	}
 
-	public void setCalendar(boolean calendar) {
+	public void setCalendar(String calendar) {
 		this.calendar = calendar;
 	}
 
@@ -175,7 +177,13 @@ public class RespDoctorProfileDTO {
 	public void setDocuments(Map<String, String> documents) {
 		this.documents = documents;
 	}
-	
-	
 
+	public boolean isProfileDelted() {
+		return profileDelted;
+	}
+
+	public void setProfileDelted(boolean profileDelted) {
+		this.profileDelted = profileDelted;
+	}
+	
 }

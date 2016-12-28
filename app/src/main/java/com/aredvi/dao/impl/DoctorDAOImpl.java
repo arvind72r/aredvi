@@ -1,6 +1,5 @@
 package com.aredvi.dao.impl;
 
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,16 +29,6 @@ public class DoctorDAOImpl implements DoctorDAO{
 	@Override
 	public Doctor getDoctorProfile(UUID usrId) throws AredviException {
 		return doctorRepo.findById(usrId);
-	}
-
-	@Override
-	public List<Doctor> searchDoctorByType(String name) throws AredviException {
-		return null;
-	}
-
-	@Override
-	public List<Doctor> searchDoctorByName(String name) throws AredviException {
-		return null;
 	}
 
 }

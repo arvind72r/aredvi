@@ -1,7 +1,5 @@
 package com.aredvi.services.impl;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -52,15 +50,6 @@ public class DoctorServiceImpl implements DoctorService {
 		return respDoctorProfileDTO;
 	}
 
-	@Override
-	public List<RespDoctorProfileDTO> searchDoctorByName(String name) throws AredviException {
-		List<RespDoctorProfileDTO> respDoctorProfileDTOs = new ArrayList<RespDoctorProfileDTO>();
-		List<Doctor> doctors = doctorDAO.searchDoctorByName(name);
-		for (Doctor doctor : doctors) {
-			respDoctorProfileDTOs.add(convertEntityToResponse(doctor));
-		}
-		return respDoctorProfileDTOs;
-	}
 
 	public Doctor convertRequestToEntity(ReqDoctorProfileDTO requestData) throws AredviException {
 		Doctor doctor = new Doctor();
@@ -76,7 +65,7 @@ public class DoctorServiceImpl implements DoctorService {
 	
 	public void swapData(Doctor doctor,ReqDoctorProfileDTO requestData){
 		if(null != requestData){
-			doctor.setCalendar(requestData.isCalendar());
+			doctor.setCalendar(requestData.getCalendar());
 			doctor.setDob(requestData.getDob());
 			doctor.setDocuments(requestData.getDocuments());
 			doctor.setEmail(requestData.getEmail());
@@ -92,12 +81,13 @@ public class DoctorServiceImpl implements DoctorService {
 			doctor.setProfile(requestData.getProfile());
 			doctor.setSpecialities(requestData.getSpecialities());
 			doctor.setVarified(requestData.isVarified());
+			doctor.setProfileDelted(requestData.isProfileDelted());
 		}
 	}
 	
 	public void swapData(RespDoctorProfileDTO respData, Doctor doctor){
 		if(null != doctor){
-			respData.setCalendar(doctor.isCalendar());
+			respData.setCalendar(doctor.getCalendar());
 			respData.setDob(doctor.getDob());
 			respData.setDocuments(doctor.getDocuments());
 			respData.setEmail(doctor.getEmail());
@@ -112,7 +102,9 @@ public class DoctorServiceImpl implements DoctorService {
 			respData.setPhoto(doctor.getPhoto());
 			respData.setProfile(doctor.getProfile());
 			respData.setSpecialities(doctor.getSpecialities());
-			respData.setVarified(doctor.isVarified());}
+			respData.setVarified(doctor.isVarified());
+			respData.setProfileDelted(doctor.isProfileDelted());
+		}
 	}
 	
 	private void convertUserToDoctor(User user, Doctor doctor) {

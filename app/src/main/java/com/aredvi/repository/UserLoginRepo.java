@@ -11,7 +11,7 @@ public interface UserLoginRepo extends CassandraRepository<UserLogin>{
 	@Query("Select * from userlogin where user_name=?0 ALLOW FILTERING")
 	UserLogin findByUserName(String username);
 
-	@Query("Select * from userlogin where auth_id=?0")
+	@Query("Select * from userlogin where auth_id=?0 ALLOW FILTERING")
 	UserLogin findByAuthId(String authid);
 
 }

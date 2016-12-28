@@ -1,20 +1,28 @@
 package com.aredvi.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.apache.solr.client.solrj.beans.Field;
 import org.springframework.cassandra.core.PrimaryKeyType;
 import org.springframework.data.cassandra.mapping.Column;
 import org.springframework.data.cassandra.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.mapping.Table;
 
 @Table("doctor")
-public class Doctor {
+public class Doctor implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9143686145646852309L;
+
 	@PrimaryKeyColumn(name = "id",ordinal = 1,type = PrimaryKeyType.PARTITIONED)
 	private UUID id;
 	
+	@Field
 	@Column(value = "f_name")
 	private String fname;
 	
@@ -52,13 +60,16 @@ public class Doctor {
 	private String profile;
 	
 	@Column(value = "calendar")
-	private boolean calendar;
+	private String calendar;
 	
 	@Column(value = "photo")
 	private String photo;
 	
 	@Column(value = "documents")
 	private Map<String, String> documents;
+	
+	@Column(value = "profile_delted")
+	private boolean profileDelted;
 	
 	public UUID getId() {
 		return id;
@@ -164,11 +175,11 @@ public class Doctor {
 		this.profile = profile;
 	}
 
-	public boolean isCalendar() {
+	public String getCalendar() {
 		return calendar;
 	}
 
-	public void setCalendar(boolean calendar) {
+	public void setCalendar(String calendar) {
 		this.calendar = calendar;
 	}
 
@@ -188,9 +199,17 @@ public class Doctor {
 		this.documents = documents;
 	}
 
+	public boolean isProfileDelted() {
+		return profileDelted;
+	}
+
+	public void setProfileDelted(boolean profileDelted) {
+		this.profileDelted = profileDelted;
+	}
+
 	public Doctor(UUID id, String fname, String lname, String mobileNumber, String email, Date dob, String gender,
 			String mpLicAuthority, String mpLicNo, Date mpLicDateOfIssue, boolean varified, List<String> specialities,
-			String profile, boolean calendar, String photo, Map<String, String> documents) {
+			String profile, String calendar, String photo, Map<String, String> documents, boolean profileDelted) {
 		this.id = id;
 		this.fname = fname;
 		this.lname = lname;
@@ -207,11 +226,12 @@ public class Doctor {
 		this.calendar = calendar;
 		this.photo = photo;
 		this.documents = documents;
+		this.profileDelted = profileDelted;
 	}
 
 	public Doctor(String fname, String lname, String mobileNumber, String email, Date dob, String gender,
 			String mpLicAuthority, String mpLicNo, Date mpLicDateOfIssue, boolean varified, List<String> specialities,
-			String profile, boolean calendar, String photo, Map<String, String> documents) {
+			String profile, String calendar, String photo, Map<String, String> documents, boolean profileDelted) {
 		this.fname = fname;
 		this.lname = lname;
 		this.mobileNumber = mobileNumber;
@@ -227,6 +247,7 @@ public class Doctor {
 		this.calendar = calendar;
 		this.photo = photo;
 		this.documents = documents;
+		this.profileDelted = profileDelted;
 	}
 	public Doctor(){
 		

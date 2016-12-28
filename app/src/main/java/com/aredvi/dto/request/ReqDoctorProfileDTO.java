@@ -34,11 +34,13 @@ public class ReqDoctorProfileDTO {
 	
 	private String profile;
 	
-	private boolean calendar;
+	private String calendar;
 	
 	private String photo;
 	
 	private Map<String, String> documents;
+	
+	private boolean profileDelted;
 
 	public UUID getId() {
 		return id;
@@ -136,14 +138,6 @@ public class ReqDoctorProfileDTO {
 		this.profile = profile;
 	}
 
-	public boolean isCalendar() {
-		return calendar;
-	}
-
-	public void setCalendar(boolean calendar) {
-		this.calendar = calendar;
-	}
-
 	public String getPhoto() {
 		return photo;
 	}
@@ -174,6 +168,22 @@ public class ReqDoctorProfileDTO {
 
 	public void setDob(Date dob) {
 		this.dob = dob;
+	}
+
+	public boolean isProfileDelted() {
+		return profileDelted;
+	}
+
+	public void setProfileDelted(boolean profileDelted) {
+		this.profileDelted = profileDelted;
+	}
+
+	public String getCalendar() {
+		return calendar;
+	}
+
+	public void setCalendar(String calendar) {
+		this.calendar = calendar;
 	}
 	
 }

@@ -1,5 +1,6 @@
 package com.aredvi.entity;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
@@ -12,8 +13,10 @@ import org.springframework.data.cassandra.mapping.Table;
 import com.datastax.driver.core.utils.UUIDs;
 
 @Table("authority")
-public class Authority {
+public class Authority implements Serializable{
 	
+	private static final long serialVersionUID = -1738383681764697399L;
+
 	@PrimaryKeyColumn(name = "id",ordinal = 0,type = PrimaryKeyType.PARTITIONED)
 	private UUID id;
 	
