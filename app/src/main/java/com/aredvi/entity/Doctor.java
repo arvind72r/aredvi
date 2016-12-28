@@ -71,6 +71,9 @@ public class Doctor implements Serializable{
 	@Column(value = "profile_delted")
 	private boolean profileDelted;
 	
+	@Column(value = "phone_number")
+	private List<String> phoneNumber;
+	
 	public UUID getId() {
 		return id;
 	}
@@ -206,10 +209,18 @@ public class Doctor implements Serializable{
 	public void setProfileDelted(boolean profileDelted) {
 		this.profileDelted = profileDelted;
 	}
+	
+	public List<String> getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(List<String> phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
 
 	public Doctor(UUID id, String fname, String lname, String mobileNumber, String email, Date dob, String gender,
 			String mpLicAuthority, String mpLicNo, Date mpLicDateOfIssue, boolean varified, List<String> specialities,
-			String profile, String calendar, String photo, Map<String, String> documents, boolean profileDelted) {
+			String profile, String calendar, String photo, Map<String, String> documents, boolean profileDelted, List<String>  phoneNumber) {
 		this.id = id;
 		this.fname = fname;
 		this.lname = lname;
@@ -227,11 +238,12 @@ public class Doctor implements Serializable{
 		this.photo = photo;
 		this.documents = documents;
 		this.profileDelted = profileDelted;
+		this.phoneNumber = phoneNumber;
 	}
 
 	public Doctor(String fname, String lname, String mobileNumber, String email, Date dob, String gender,
 			String mpLicAuthority, String mpLicNo, Date mpLicDateOfIssue, boolean varified, List<String> specialities,
-			String profile, String calendar, String photo, Map<String, String> documents, boolean profileDelted) {
+			String profile, String calendar, String photo, Map<String, String> documents, boolean profileDelted, List<String>  phoneNumber) {
 		this.fname = fname;
 		this.lname = lname;
 		this.mobileNumber = mobileNumber;
@@ -248,6 +260,7 @@ public class Doctor implements Serializable{
 		this.photo = photo;
 		this.documents = documents;
 		this.profileDelted = profileDelted;
+		this.phoneNumber = phoneNumber;
 	}
 	public Doctor(){
 		

@@ -82,6 +82,7 @@ public class DoctorServiceImpl implements DoctorService {
 			doctor.setSpecialities(requestData.getSpecialities());
 			doctor.setVarified(requestData.isVarified());
 			doctor.setProfileDelted(requestData.isProfileDelted());
+			doctor.setPhoneNumber(requestData.getPhoneNumber());
 		}
 	}
 	
@@ -104,6 +105,7 @@ public class DoctorServiceImpl implements DoctorService {
 			respData.setSpecialities(doctor.getSpecialities());
 			respData.setVarified(doctor.isVarified());
 			respData.setProfileDelted(doctor.isProfileDelted());
+			respData.setPhoneNumber(doctor.getPhoneNumber());
 		}
 	}
 	

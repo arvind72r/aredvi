@@ -41,6 +41,8 @@ public class RespDoctorProfileDTO {
 	private Map<String, String> documents;
 	
 	private boolean profileDelted;
+	
+	private List<String> phoneNumber;
 
 	public UUID getId() {
 		return id;
@@ -184,6 +186,14 @@ public class RespDoctorProfileDTO {
 
 	public void setProfileDelted(boolean profileDelted) {
 		this.profileDelted = profileDelted;
+	}
+
+	public List<String> getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(List<String> phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 	
 }

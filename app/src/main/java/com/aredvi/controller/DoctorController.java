@@ -27,7 +27,7 @@ public class DoctorController {
 
 	@Secured("ROLE_USER")
 	@RequestMapping(value = "/addprofile", method = RequestMethod.PUT, headers = "Accept=application/json")
-	public ResponseFormatter<RespDoctorProfileDTO> addUserProfile(
+	public ResponseFormatter<RespDoctorProfileDTO> addDoctorProfile(
 			@RequestBody RequestFormatter<ReqDoctorProfileDTO> request) throws AredviException {
 		RespDoctorProfileDTO respUserProfileDTO = doctorService.addDoctorProfile(request.getRequestData());
 		ResponseFormatter<RespDoctorProfileDTO> resp = new ResponseFormatter<RespDoctorProfileDTO>();
@@ -37,7 +37,7 @@ public class DoctorController {
 
 	@Secured("ROLE_USER")
 	@RequestMapping(value = "/updateprofile", method = RequestMethod.PUT, headers = "Accept=application/json")
-	public ResponseFormatter<RespDoctorProfileDTO> updateUserProfile(
+	public ResponseFormatter<RespDoctorProfileDTO> updateDoctorProfile(
 			@RequestBody RequestFormatter<ReqDoctorProfileDTO> request) throws AredviException {
 		RespDoctorProfileDTO respUserProfileDTO = doctorService.updateDoctorProfile(request.getRequestData());
 		ResponseFormatter<RespDoctorProfileDTO> resp = new ResponseFormatter<RespDoctorProfileDTO>();
@@ -47,7 +47,7 @@ public class DoctorController {
 
 	@Secured("ROLE_USER")
 	@RequestMapping(value = "/findprofile", method = RequestMethod.GET)
-	public ResponseFormatter<RespDoctorProfileDTO> getUserProfile(@RequestParam UUID usrId) throws AredviException {
+	public ResponseFormatter<RespDoctorProfileDTO> getDoctorProfile(@RequestParam UUID usrId) throws AredviException {
 		RespDoctorProfileDTO respUserProfileDTO = doctorService.getDoctorProfile(usrId);
 		ResponseFormatter<RespDoctorProfileDTO> resp = new ResponseFormatter<RespDoctorProfileDTO>();
 		resp.setResponseData(respUserProfileDTO);

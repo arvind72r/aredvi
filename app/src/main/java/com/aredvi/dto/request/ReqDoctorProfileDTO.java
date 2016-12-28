@@ -40,6 +40,8 @@ public class ReqDoctorProfileDTO {
 	
 	private Map<String, String> documents;
 	
+	private List<String> phoneNumber;
+	
 	private boolean profileDelted;
 
 	public UUID getId() {
@@ -184,6 +186,14 @@ public class ReqDoctorProfileDTO {
 
 	public void setCalendar(String calendar) {
 		this.calendar = calendar;
+	}
+
+	public List<String> getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(List<String> phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 	
 }
