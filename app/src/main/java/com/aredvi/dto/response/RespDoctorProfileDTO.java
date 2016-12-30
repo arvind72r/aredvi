@@ -9,6 +9,8 @@ public class RespDoctorProfileDTO {
 	private UUID id;
 
 	private UUID userId;
+	
+	private UUID userLoginId;
 
 	private String fname;
 
@@ -43,6 +45,10 @@ public class RespDoctorProfileDTO {
 	private boolean profileDelted;
 	
 	private List<String> phoneNumber;
+	
+	private String lat;
+	
+	private String longs;
 
 	public UUID getId() {
 		return id;
@@ -194,6 +200,30 @@ public class RespDoctorProfileDTO {
 
 	public void setPhoneNumber(List<String> phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+
+	public UUID getUserLoginId() {
+		return userLoginId;
+	}
+
+	public void setUserLoginId(UUID userLoginId) {
+		this.userLoginId = userLoginId;
+	}
+
+	public String getLat() {
+		return lat;
+	}
+
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+
+	public String getLongs() {
+		return longs;
+	}
+
+	public void setLongs(String longs) {
+		this.longs = longs;
 	}
 	
 }

@@ -74,6 +74,12 @@ public class Doctor implements Serializable{
 	@Column(value = "phone_number")
 	private List<String> phoneNumber;
 	
+	@Column(value = "lat")
+	private String lat;
+	
+	@Column(value = "longs")
+	private String longs;
+	
 	public UUID getId() {
 		return id;
 	}
@@ -220,7 +226,7 @@ public class Doctor implements Serializable{
 
 	public Doctor(UUID id, String fname, String lname, String mobileNumber, String email, Date dob, String gender,
 			String mpLicAuthority, String mpLicNo, Date mpLicDateOfIssue, boolean varified, List<String> specialities,
-			String profile, String calendar, String photo, Map<String, String> documents, boolean profileDelted, List<String>  phoneNumber) {
+			String profile, String calendar, String photo, Map<String, String> documents, boolean profileDelted, List<String>  phoneNumber,String lat, String longs) {
 		this.id = id;
 		this.fname = fname;
 		this.lname = lname;
@@ -239,11 +245,13 @@ public class Doctor implements Serializable{
 		this.documents = documents;
 		this.profileDelted = profileDelted;
 		this.phoneNumber = phoneNumber;
+		this.lat = lat;
+		this.longs = longs;
 	}
 
 	public Doctor(String fname, String lname, String mobileNumber, String email, Date dob, String gender,
 			String mpLicAuthority, String mpLicNo, Date mpLicDateOfIssue, boolean varified, List<String> specialities,
-			String profile, String calendar, String photo, Map<String, String> documents, boolean profileDelted, List<String>  phoneNumber) {
+			String profile, String calendar, String photo, Map<String, String> documents, boolean profileDelted, List<String>  phoneNumber,String lat, String longs) {
 		this.fname = fname;
 		this.lname = lname;
 		this.mobileNumber = mobileNumber;
@@ -261,9 +269,27 @@ public class Doctor implements Serializable{
 		this.documents = documents;
 		this.profileDelted = profileDelted;
 		this.phoneNumber = phoneNumber;
+		this.lat = lat;
+		this.longs = longs;
 	}
 	public Doctor(){
 		
+	}
+
+	public String getLat() {
+		return lat;
+	}
+
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+
+	public String getLongs() {
+		return longs;
+	}
+
+	public void setLongs(String longs) {
+		this.longs = longs;
 	}
 	
 }
