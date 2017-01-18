@@ -1,5 +1,8 @@
 package com.aredvi.services.impl;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -151,7 +154,7 @@ public class UserServiceImpl implements UserService {
 	private void convertRequestToEntity(UserLogin userLogin, ReqLoginDTO reqLoginDTO) {
 		List<String> roles = new ArrayList<String>();
 		roles.add(Roles.ROLE_USER.getRole());
-		userLogin.setPassword(reqLoginDTO.getPassword());
+		userLogin.setPassword(getMD5(reqLoginDTO.getPassword()));
 		userLogin.setUserName(reqLoginDTO.getUserName());
 		userLogin.setRoles(roles);
 		userLogin.setCreatedOn(new Date());
@@ -165,5 +168,21 @@ public class UserServiceImpl implements UserService {
 	public UserLogin findByUserName(String userName) throws AredviException {
 		return userDAO.findByUserName(userName);
 	}
-
+	
+	
+	public static String getMD5(String input) {
+    try {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        byte[] messageDigest = md.digest(input.getBytes());
+        BigInteger number = new BigInteger(1, messageDigest);
+        String hashtext = number.toString(16);
+        while (hashtext.length() < 32) {
+            hashtext = "0" + hashtext;
+        }
+        return hashtext;
+    }
+    catch (NoSuchAlgorithmException e) {
+        throw new RuntimeException(e);
+    }
+}
 }

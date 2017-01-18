@@ -14,10 +14,10 @@ public class CreateTables {
 			+ "updated_on timestamp, is_verified boolean, is_lock boolean, "
 			+ "PRIMARY KEY(id, user_name))with CLUSTERING ORDER BY (user_name DESC);";
 	
-	public static final String DOCTOR = "CREATE TABLE user(id uuid, f_name text, l_name text, dob date, mobile_number text, "
-			+ "email text, profile text, photo text, city text, gender text,mp_lic_authority text, mp_lic_no text, "
+	public static final String DOCTOR = "CREATE TABLE doctor(id uuid, f_name text, l_name text, dob date, mobile_number text, "
+			+ "email text, profile text, photo text, city text, gender text,mp_lic_authority text, mp_lic_no text, calendar text, "
 			+ "mp_lic_date_of_issue date, varified boolean, profile_delted boolean, specialities list<text>, "
-			+ "phones list<text>, documents map<String,String>, PRIMARY KEY(id));";
+			+ "phone list<text>, documents map<String,String>, lat text, longs text, PRIMARY KEY(id));";
 	
 	
 }

@@ -38,6 +38,10 @@ public class UserController extends AredviController{
 		}else if(!(request.getPassword()).equalsIgnoreCase(request.getConfirmPassword())){
 			throw new InvalidRequestException("Password and Confirm password are not same.");
 		}
+		UserLogin userLogin = usrService.findByUserName(request.getUserName());
+		if(null != userLogin){
+			 throw new UsernameNotFoundException("User name already exist.");
+		}
 		RespLoginDTO respLoginDTO = usrService.createLogin(request);
 		ResponseFormatter<RespLoginDTO> resp = new ResponseFormatter<RespLoginDTO>();
 		resp.setResponseData(respLoginDTO);
@@ -62,13 +66,29 @@ public class UserController extends AredviController{
 		return resp;
 	}
 
-	@Secured("ROLE_USER")
 	@RequestMapping(value = "/addprofile", method = RequestMethod.PUT, headers = "Accept=application/json")
 	public ResponseFormatter<RespUserProfileDTO> addUserProfile(
 			@RequestBody ReqUserProfileDTO request) throws AredviException {
-		RespUserProfileDTO respUserProfileDTO = usrService.addUserProfile(request);
 		ResponseFormatter<RespUserProfileDTO> resp = new ResponseFormatter<RespUserProfileDTO>();
+		if(null == request){
+			 throw new InvalidRequestException("Credentials are missing.");
+		}else if(!(request.getPassword()).equalsIgnoreCase(request.getConfirmPassword())){
+			throw new InvalidRequestException("Password and Confirm password are not same.");
+		}
+		UserLogin userLogin = usrService.findByUserName(request.getUserName());
+		if(null != userLogin){
+			 throw new UsernameNotFoundException("User name already exist.");
+		}
+		ReqLoginDTO reqLogin = new ReqLoginDTO();
+		reqLogin.setUserName(request.getUserName());
+		reqLogin.setConfirmPassword(request.getConfirmPassword());
+		reqLogin.setPassword(request.getPassword());
+		RespLoginDTO respLoginDTO = usrService.createLogin(reqLogin);
+		if(null !=respLoginDTO){
+		request.setUserLoginId(respLoginDTO.getUserLoginId());
+		RespUserProfileDTO respUserProfileDTO = usrService.addUserProfile(request);
 		resp.setResponseData(respUserProfileDTO);
+		}
 		return resp;
 	}
 

@@ -49,6 +49,8 @@ public class RespDoctorProfileDTO {
 	private String lat;
 	
 	private String longs;
+	
+	private String city;
 
 	public UUID getId() {
 		return id;
@@ -224,6 +226,14 @@ public class RespDoctorProfileDTO {
 
 	public void setLongs(String longs) {
 		this.longs = longs;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 	
 }

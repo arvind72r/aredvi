@@ -4,23 +4,25 @@ import java.io.Serializable;
 import java.util.UUID;
 
 import org.apache.solr.client.solrj.beans.Field;
+import org.springframework.cassandra.core.Ordering;
 import org.springframework.cassandra.core.PrimaryKeyType;
 import org.springframework.data.cassandra.mapping.Column;
 import org.springframework.data.cassandra.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.mapping.Table;
 
 
-@Table("inventory")
-public class Inventory implements Serializable{
+@Table("inventory_by_google_id")
+public class InventoryByGoogleId implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -2702723316973008802L;
 	
 	@Field("id")
-	@PrimaryKeyColumn(name = "id",ordinal = 1,type = PrimaryKeyType.PARTITIONED)
+	@PrimaryKeyColumn(name = "id",ordinal = 0,type = PrimaryKeyType.PARTITIONED)
 	private UUID id;
 	
+	@PrimaryKeyColumn(name = "google_id",ordinal = 1,type = PrimaryKeyType.CLUSTERED, ordering = Ordering.DESCENDING)
 	@Field("google_id")
 	@Column(value = "google_id")
 	private String googleId;

@@ -85,6 +85,7 @@ public class DoctorServiceImpl implements DoctorService {
 			doctor.setPhoneNumber(requestData.getPhoneNumber());
 			doctor.setLat(requestData.getLat());
 			doctor.setLongs(requestData.getLongs());
+			doctor.setCity(requestData.getCity());
 		}
 	}
 	
@@ -110,6 +111,7 @@ public class DoctorServiceImpl implements DoctorService {
 			respData.setPhoneNumber(doctor.getPhoneNumber());
 			respData.setLat(doctor.getLat());
 			respData.setLongs(doctor.getLongs());
+			respData.setCity(doctor.getCity());
 		}
 	}
 	
