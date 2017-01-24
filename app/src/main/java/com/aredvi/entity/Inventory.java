@@ -21,19 +21,19 @@ public class Inventory implements Serializable{
 	@PrimaryKeyColumn(name = "id",ordinal = 1,type = PrimaryKeyType.PARTITIONED)
 	private UUID id;
 	
-	@Field("google_id")
+	@Field("googleid")
 	@Column(value = "google_id")
 	private String googleId;
 	
-	@Field("place_id")
+	@Field("placeid")
 	@Column(value = "place_id")
 	private String placeId;
 	
-	@Field("solar_id")
+	@Field("solarid")
 	@Column(value = "solar_id")
 	private String solarId;
 
-	@Field("full_name")
+	@Field("fullname")
 	@Column(value = "full_name")
 	private String fullname;
 	
@@ -77,6 +77,9 @@ public class Inventory implements Serializable{
 	@Column(value = "mobile")
 	private String mobile;
 	
+	
+	@Column(value = "city")
+	private String city;
 
 	public String getFullname() {
 		return fullname;
@@ -196,6 +199,14 @@ public class Inventory implements Serializable{
 
 	public void setPlaceId(String placeId) {
 		this.placeId = placeId;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 }

@@ -80,6 +80,9 @@ public class Doctor implements Serializable{
 	@Column(value = "longs")
 	private String longs;
 	
+	@Column(value = "address")
+	private String address;
+	
 	@Column(value = "city")
 	private String city;
 	
@@ -251,9 +254,17 @@ public class Doctor implements Serializable{
 		this.longs = longs;
 	}
 
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	public Doctor(UUID id, String fname, String lname, String mobileNumber, String email, Date dob, String gender,
 			String mpLicAuthority, String mpLicNo, Date mpLicDateOfIssue, boolean varified, List<String> specialities,
-			String profile, String calendar, String photo, Map<String, String> documents, boolean profileDelted, List<String>  phoneNumber,
+			String profile, String calendar, String photo,String address, Map<String, String> documents, boolean profileDelted, List<String>  phoneNumber,
 			String lat, String longs, String city) {
 		this.id = id;
 		this.fname = fname;
@@ -276,12 +287,13 @@ public class Doctor implements Serializable{
 		this.lat = lat;
 		this.longs = longs;
 		this.city =city; 
+		this.address = address;
 	}
 
 	public Doctor(String fname, String lname, String mobileNumber, String email, Date dob, String gender,
 			String mpLicAuthority, String mpLicNo, Date mpLicDateOfIssue, boolean varified, List<String> specialities,
 			String profile, String calendar, String photo, Map<String, String> documents, boolean profileDelted, List<String>  phoneNumber,
-			String lat, String longs, String city) {
+			String lat, String longs, String city,String address) {
 		this.fname = fname;
 		this.lname = lname;
 		this.mobileNumber = mobileNumber;
@@ -302,6 +314,7 @@ public class Doctor implements Serializable{
 		this.lat = lat;
 		this.longs = longs;
 		this.city =city; 
+		this.address = address;
 	}
 	public Doctor(){
 		

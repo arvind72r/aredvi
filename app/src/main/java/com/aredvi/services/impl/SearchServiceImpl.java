@@ -13,25 +13,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import com.aredvi.entity.Place;
+import com.aredvi.services.interfaces.SearchService;
 
-public class SearchServiceImpl {
-    private static final String LOG_TAG = "SearchImpl";
-
-    private static final String PLACES_API_BASE = "https://maps.googleapis.com/maps/api/place";
-
-    private static final String TYPE_AUTOCOMPLETE = "/autocomplete";
-    private static final String TYPE_DETAILS = "/details";
-    private static final String TYPE_SEARCH = "/search";
-
-    private static final String OUT_JSON = "/json";
+@Service("searchService")
+public class SearchServiceImpl implements SearchService{
     
     private static final Logger LOGGER = LoggerFactory.getLogger(SearchServiceImpl.class);
 
-    private static final String API_KEY = "AIzaSyCeAgA7UGqjrRxqKUw410H5XMwEXGXEAlA";
-
-    public static ArrayList<Place> autocomplete(String input) {
+    @Override
+    public  ArrayList<Place> autocomplete(String input) {
         ArrayList<Place> resultList = null;
 
         HttpURLConnection conn = null;
@@ -85,7 +78,8 @@ public class SearchServiceImpl {
         return resultList;
     }
 
-    public static ArrayList<Place> search(String keyword, double lat, double lng, int radius) {
+    @Override
+    public  ArrayList<Place> search(String keyword, double lat, double lng, int radius) {
         ArrayList<Place> resultList = null;
 
         HttpURLConnection conn = null;
@@ -148,7 +142,8 @@ public class SearchServiceImpl {
         return resultList;
     }
 
-    public static Place details(Place rPlace) {
+    @Override
+    public  Place details(String reference) {
         HttpURLConnection conn = null;
         StringBuilder jsonResults = new StringBuilder();
         try {
@@ -157,7 +152,7 @@ public class SearchServiceImpl {
             sb.append(OUT_JSON);
             sb.append("?sensor=false");
             sb.append("&key=" + API_KEY);
-            sb.append("&reference=" + URLEncoder.encode(rPlace.getReference(), "utf8"));
+            sb.append("&reference=" + URLEncoder.encode(reference, "utf8"));
 
             URL url = new URL(sb.toString());
             conn = (HttpURLConnection) url.openConnection();
@@ -181,7 +176,7 @@ public class SearchServiceImpl {
             }
         }
 
-        Place place = rPlace;
+        Place place = null;
         try {
             // Create a JSON object hierarchy from the results
             JSONObject jsonObj = new JSONObject(jsonResults.toString()).getJSONObject("result");
@@ -190,6 +185,12 @@ public class SearchServiceImpl {
             place.setIcon(jsonObj.getString("icon"));
             place.setName(jsonObj.getString("name"));
             place.setFormattedAddress(jsonObj.getString("formatted_address"));
+            place.setLocationlat(jsonObj.getJSONObject("geometry").getJSONObject("location").getString("lat"));
+            place.setLocationlat(jsonObj.getJSONObject("geometry").getJSONObject("location").getString("lng"));
+            place.setNortheastlat(jsonObj.getJSONObject("geometry").getJSONObject("location").getJSONObject("viewport").getJSONObject("northeast").getString("lat"));
+            place.setNortheastlng(jsonObj.getJSONObject("geometry").getJSONObject("location").getJSONObject("viewport").getJSONObject("northeast").getString("lng"));
+            place.setSouthwestlat(jsonObj.getJSONObject("geometry").getJSONObject("location").getJSONObject("viewport").getJSONObject("southwest").getString("lat"));
+            place.setSouthwestlng(jsonObj.getJSONObject("geometry").getJSONObject("location").getJSONObject("viewport").getJSONObject("southwest").getString("lng"));
             if (jsonObj.has("formatted_phone_number")) {
                 place.setFormattedPhoneNumber(jsonObj.getString("formatted_phone_number"));
             }
@@ -200,7 +201,4 @@ public class SearchServiceImpl {
         return place;
     }
     
-    public static void main(String[] args){
-    	search(null,51.5033640,-0.1276250,500);
-    }
 }

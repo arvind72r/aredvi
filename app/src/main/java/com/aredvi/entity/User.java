@@ -44,6 +44,9 @@ public class User implements Serializable{
 	@Column(value = "email")
 	private String email;
 	
+	@Column(value = "address")
+	private String address;
+	
 	@Column(value = "city")
 	private String city;
 	
@@ -164,7 +167,15 @@ public class User implements Serializable{
 		this.parentId = parentId;
 	}
 
-	public User(UUID id, UUID userLoginId, String fname, String lname, Date dob,String city, String mobileNumber, String email, String gender,
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public User(UUID id, UUID userLoginId, String fname, String lname, Date dob,String address, String city, String mobileNumber, String email, String gender,
 			String type, List<String> allergies, List<String> familyPhysician, UUID parentId) {
 		this.id = id;
 		this.userLoginId = userLoginId;
@@ -179,9 +190,10 @@ public class User implements Serializable{
 		this.allergies = allergies;
 		this.familyPhysician = familyPhysician;
 		this.parentId = parentId;
+		this.address = address;
 	}
 
-	public User(UUID userLoginId, String fname, String lname,Date dob,String city, String mobileNumber, String email, String gender, String type,
+	public User(UUID userLoginId, String fname, String lname,Date dob,String address, String city, String mobileNumber, String email, String gender, String type,
 			List<String> allergies, List<String> familyPhysician, UUID parentId) {
 		this.id = UUIDs.timeBased();
 		this.userLoginId = userLoginId;
@@ -196,6 +208,7 @@ public class User implements Serializable{
 		this.allergies = allergies;
 		this.familyPhysician = familyPhysician;
 		this.parentId = parentId;
+		this.address = address;
 	}
 
 	public User(){

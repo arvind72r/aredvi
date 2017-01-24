@@ -9,7 +9,7 @@ import com.aredvi.services.interfaces.InventorySolarService;
 
 public class InventorySolarServiceImpl implements InventorySolarService {
 	
-	@Autowired
+	/*@Autowired
 	InventorySolarRepo inventorySolarRepo;
 
 	@Override
@@ -31,6 +31,6 @@ public class InventorySolarServiceImpl implements InventorySolarService {
 	@Override
 	public void deleteInventoryProfile(Inventory inventory) throws AredviException {
 		  inventorySolarRepo.delete(inventory);
-	}
+	}*/
 
 }

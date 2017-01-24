@@ -30,6 +30,8 @@ public class RespUserProfileDTO {
 	private UUID parentId;
 	
 	private List<String> familyPhysician;
+	
+	private String address;
 
 	public UUID getId() {
 		return id;
@@ -133,6 +135,14 @@ public class RespUserProfileDTO {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 }

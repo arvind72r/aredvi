@@ -5,7 +5,7 @@ public class CreateTables {
 			+ "PRIMARY KEY(id, role)) with CLUSTERING ORDER BY (role DESC);";
 	
 	public static final String USER = "CREATE TABLE user(id uuid, user_id uuid, parent_id uuid,"
-			+ " f_name text, l_name text, dob date, mobile_number text, email text, "
+			+ " f_name text, l_name text, dob date, mobile_number text, email text, address text, "
 			+ "city text, gender text, type text, allergies list<text>, profile_delted boolean, "
 			+ "family_physician list<text>, PRIMARY KEY(id));";
 	
@@ -15,9 +15,11 @@ public class CreateTables {
 			+ "PRIMARY KEY(id, user_name))with CLUSTERING ORDER BY (user_name DESC);";
 	
 	public static final String DOCTOR = "CREATE TABLE doctor(id uuid, f_name text, l_name text, dob date, mobile_number text, "
-			+ "email text, profile text, photo text, city text, gender text,mp_lic_authority text, mp_lic_no text, calendar text, "
+			+ "email text, profile text, photo text, address text, city text, gender text,mp_lic_authority text, mp_lic_no text, calendar text, "
 			+ "mp_lic_date_of_issue date, varified boolean, profile_delted boolean, specialities list<text>, "
-			+ "phone list<text>, documents map<String,String>, lat text, longs text, PRIMARY KEY(id));";
+			+ "phone list<text>, documents map<text,text>, lat text, longs text, PRIMARY KEY(id));";
 	
-	
+	public static final String INVENTORY =  "CREATE TABLE inventory(id uuid, googleid text, placeid text, solarid text, fullname text,"
+			+ " profile text, profile_delted boolean, varified boolean, address text, city text, specialities text, lat text, "
+			+ "longs text, address text, phone list<text>, mobile_number text, type text PRIMARY KEY(id));";
 }

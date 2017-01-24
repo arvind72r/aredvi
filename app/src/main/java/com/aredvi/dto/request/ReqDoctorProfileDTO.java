@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.apache.solr.client.solrj.beans.Field;
+import org.springframework.data.cassandra.mapping.Column;
+
 public class ReqDoctorProfileDTO {
 	private UUID id;
 	
@@ -51,6 +54,12 @@ public class ReqDoctorProfileDTO {
 	private String longs;
 	
 	private String city;
+	
+	private String address;
+	
+	private String googleId;
+	
+	private String placeId;
 
 	public UUID getId() {
 		return id;
@@ -234,6 +243,30 @@ public class ReqDoctorProfileDTO {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getGoogleId() {
+		return googleId;
+	}
+
+	public void setGoogleId(String googleId) {
+		this.googleId = googleId;
+	}
+
+	public String getPlaceId() {
+		return placeId;
+	}
+
+	public void setPlaceId(String placeId) {
+		this.placeId = placeId;
 	}
 	
 }

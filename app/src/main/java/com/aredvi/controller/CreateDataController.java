@@ -15,6 +15,7 @@ import com.aredvi.entity.UserLogin;
 import com.aredvi.entity.UserRole;
 import com.aredvi.exceptions.AredviException;
 import com.aredvi.repository.CreateTables;
+import com.aredvi.repository.Createindexes;
 
 
 @RestController
@@ -29,6 +30,14 @@ public class CreateDataController extends AredviController {
 		cassandraOperations.execute(CreateTables.USER);
 		cassandraOperations.execute(CreateTables.USER_LOGIN);
 		cassandraOperations.execute(CreateTables.DOCTOR);
+		cassandraOperations.execute(CreateTables.INVENTORY);
+	}
+	
+	@RequestMapping(value = "/createindex", method = RequestMethod.GET)
+	public void createIndex(){
+		cassandraOperations.execute(Createindexes.INVENTORY_FULL_NAME);
+		cassandraOperations.execute(Createindexes.INVENTORY_GOOGLE_ID);
+		cassandraOperations.execute(Createindexes.INVENTORY_PLACE_ID);
 	}
 	
 	@RequestMapping(value = "/insertvalues", method = RequestMethod.GET)

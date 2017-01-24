@@ -36,6 +36,8 @@ public class ReqUserProfileDTO {
 	private String password;
 	
 	private String confirmPassword;
+	
+	private String address;
 
 	public UUID getId() {
 		return id;
@@ -163,6 +165,14 @@ public class ReqUserProfileDTO {
 
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 }

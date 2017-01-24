@@ -7,10 +7,12 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.aredvi.dao.interfaces.DoctorDAO;
+import com.aredvi.dao.interfaces.InventoryDAO;
 import com.aredvi.dao.interfaces.UserDAO;
 import com.aredvi.dto.request.ReqDoctorProfileDTO;
 import com.aredvi.dto.response.RespDoctorProfileDTO;
 import com.aredvi.entity.Doctor;
+import com.aredvi.entity.Inventory;
 import com.aredvi.entity.User;
 import com.aredvi.exceptions.AredviException;
 import com.aredvi.services.interfaces.DoctorService;
@@ -23,6 +25,9 @@ public class DoctorServiceImpl implements DoctorService {
 	
 	@Resource(name = "userDAO")
 	private UserDAO userDAO;
+	
+	@Resource(name="inventoryDAO")
+	private InventoryDAO inventoryDAO;
 
 	@Override
 	public RespDoctorProfileDTO addDoctorProfile(ReqDoctorProfileDTO requestData) throws AredviException {
@@ -31,6 +36,9 @@ public class DoctorServiceImpl implements DoctorService {
 		Doctor doctor = convertRequestToEntity(requestData);
 		convertUserToDoctor(user,doctor);
 		doctor = doctorDAO.addDoctorProfile(doctor);
+		respDoctorProfileDTO = convertEntityToResponse(doctor);	
+		Inventory inventory = convertRequestToInventory(requestData,doctor);
+		inventoryDAO.addInventory(inventory);
 		return respDoctorProfileDTO;
 	}
 
@@ -39,6 +47,9 @@ public class DoctorServiceImpl implements DoctorService {
 		RespDoctorProfileDTO respDoctorProfileDTO = new RespDoctorProfileDTO();
 		Doctor doctor = convertRequestToEntity(requestData);
 		doctor = doctorDAO.updateDoctorProfile(doctor);
+		respDoctorProfileDTO = convertEntityToResponse(doctor);
+		Inventory inventory = convertRequestToInventory(requestData,doctor);
+		inventoryDAO.updateInventory(inventory);
 		return respDoctorProfileDTO;
 	}
 
@@ -61,6 +72,43 @@ public class DoctorServiceImpl implements DoctorService {
 		RespDoctorProfileDTO respDoctorProfileDTO = new RespDoctorProfileDTO();
 		swapData(respDoctorProfileDTO,doctor);
 		return respDoctorProfileDTO;
+	}
+	
+	public Inventory convertRequestToInventory(ReqDoctorProfileDTO requestData, Doctor doctor) throws AredviException {
+		Inventory inventory = new Inventory();
+		swapData(inventory,requestData,doctor);
+		return inventory;
+	}
+
+	public void swapData(Inventory inventory, ReqDoctorProfileDTO requestData,Doctor doctor){
+		inventory.setAddress(requestData.getAddress());
+		inventory.setCity(requestData.getCity());
+		inventory.setFullname(requestData.getFname()+requestData.getLname());
+		inventory.setGoogleId(requestData.getGoogleId());
+		inventory.setId(doctor.getId());
+		inventory.setLat(doctor.getLat());
+		inventory.setLongs(doctor.getLongs());
+		inventory.setMobile(doctor.getMobileNumber());
+		String phone = "";
+		if(null != doctor.getPhoneNumber()){
+			for(String ph : doctor.getPhoneNumber()){
+				phone = phone +","+ph;
+			}
+		}
+		inventory.setPhone(phone);
+		inventory.setPlaceId(requestData.getPlaceId());
+		inventory.setProfileDelted(doctor.isProfileDelted());
+		inventory.setProfile(requestData.getProfile());
+		inventory.setSolarId(doctor.getId().toString());
+		String specialities = "";
+		if(null != doctor.getPhoneNumber()){
+			for(String speciality : doctor.getPhoneNumber()){
+				specialities = specialities +","+speciality;
+			}
+		}
+		inventory.setSpecialities(specialities);
+		inventory.setType("DOCTOR");
+		inventory.setVarified(doctor.isVarified());
 	}
 	
 	public void swapData(Doctor doctor,ReqDoctorProfileDTO requestData){

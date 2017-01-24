@@ -51,7 +51,7 @@ public class UserController extends AredviController{
 	@Secured("ROLE_USER")
 	@RequestMapping(value = "/updateLogin", method = RequestMethod.PUT, headers = "Accept=application/json")
 	public ResponseFormatter<RespLoginDTO> updateLogin(@RequestBody ReqLoginDTO request) throws AredviException{
-		if(null == request){
+		if(null == request || request.getPassword() == null || request.getUserName()==null){
 			 throw new InvalidRequestException("Credentials are missing.");
 		}else if(!(request.getPassword()).equalsIgnoreCase(request.getConfirmPassword())){
 			throw new InvalidRequestException("Password and Confirm password are not same.");
@@ -70,7 +70,7 @@ public class UserController extends AredviController{
 	public ResponseFormatter<RespUserProfileDTO> addUserProfile(
 			@RequestBody ReqUserProfileDTO request) throws AredviException {
 		ResponseFormatter<RespUserProfileDTO> resp = new ResponseFormatter<RespUserProfileDTO>();
-		if(null == request){
+		if(null == request || request.getPassword() == null || request.getUserName()==null){
 			 throw new InvalidRequestException("Credentials are missing.");
 		}else if(!(request.getPassword()).equalsIgnoreCase(request.getConfirmPassword())){
 			throw new InvalidRequestException("Password and Confirm password are not same.");
