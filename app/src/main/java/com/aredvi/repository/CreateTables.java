@@ -20,6 +20,6 @@ public class CreateTables {
 			+ "phone list<text>, documents map<text,text>, lat text, longs text, PRIMARY KEY(id));";
 	
 	public static final String INVENTORY =  "CREATE TABLE inventory(id uuid, googleid text, placeid text, solarid text, fullname text,"
-			+ " profile text, profile_delted boolean, varified boolean, address text, city text, specialities text, lat text, "
-			+ "longs text, address text, phone list<text>, mobile_number text, type text PRIMARY KEY(id));";
+			+ " profile text, profile_delted boolean, varified boolean, city text, specialities text, lat text, "
+			+ "longs text, address text, phone list<text>, mobile_number text, type text, PRIMARY KEY(id));";
 }

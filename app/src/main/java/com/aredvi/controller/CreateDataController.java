@@ -36,8 +36,6 @@ public class CreateDataController extends AredviController {
 	@RequestMapping(value = "/createindex", method = RequestMethod.GET)
 	public void createIndex(){
 		cassandraOperations.execute(Createindexes.INVENTORY_FULL_NAME);
-		cassandraOperations.execute(Createindexes.INVENTORY_GOOGLE_ID);
-		cassandraOperations.execute(Createindexes.INVENTORY_PLACE_ID);
 	}
 	
 	@RequestMapping(value = "/insertvalues", method = RequestMethod.GET)
