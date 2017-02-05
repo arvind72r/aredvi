@@ -1,7 +1,8 @@
 package com.aredvi.services.interfaces;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import com.aredvi.dto.response.RespMapDTO;
 import com.aredvi.entity.Place;
 
 public interface SearchService {
@@ -13,9 +14,11 @@ public interface SearchService {
 	public static final String OUT_JSON = "/json";
 	public static final String API_KEY = "AIzaSyCeAgA7UGqjrRxqKUw410H5XMwEXGXEAlA";
 
-	public ArrayList<Place> autocomplete(String input);
+	public List<Place> autocomplete(String input);
 
 	public Place details(String reference);
 
-	public ArrayList<Place> search(String keyword, double lat, double lng, int radius);
+	public List<Place> search(String keyword, double lat, double lng, int radius);
+	
+	public  List<RespMapDTO> search(double lat1, double lng1, double lat2, double lng2);
 }

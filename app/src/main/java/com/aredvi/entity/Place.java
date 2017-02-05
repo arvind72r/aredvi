@@ -6,6 +6,7 @@ public class Place {
 	private String reference;
 	private String name;
 	private String icon;
+	private String type;
 	private String formattedAddress;
 	private String formattedPhoneNumber;
 	private String locationlat;
@@ -117,6 +118,14 @@ public class Place {
 
 	public void setPlaceId(String placeId) {
 		this.placeId = placeId;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }
