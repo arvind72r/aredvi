@@ -1,15 +1,19 @@
 package com.aredvi.services.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import com.aredvi.entity.Inventory;
 import com.aredvi.exceptions.AredviException;
-import com.aredvi.repository.InventorySolarRepo;
 import com.aredvi.services.interfaces.InventorySolarService;
+import com.aredvi.solr.Inventory;
+import com.aredvi.solr.InventorySolarRepo;
 
+@Service("inventorySolarService")
 public class InventorySolarServiceImpl implements InventorySolarService {
 	
-	/*@Autowired
+	@Autowired
 	InventorySolarRepo inventorySolarRepo;
 
 	@Override
@@ -24,13 +28,19 @@ public class InventorySolarServiceImpl implements InventorySolarService {
 
 	@Override
 	public Inventory getInventoryProfile(String solarId) throws AredviException {
-		 inventorySolarRepo.delete(solarId);
+		 //inventorySolarRepo.
 		return null;
 	}
 
 	@Override
 	public void deleteInventoryProfile(Inventory inventory) throws AredviException {
 		  inventorySolarRepo.delete(inventory);
-	}*/
+	}
+
+	@Override
+	public List<Inventory> loadMapFrmSolr() throws AredviException {
+		return  (List<Inventory>) inventorySolarRepo.findAll();
+		//return inventorySolarRepo.findByFullName("sushant");
+	}
 
 }

@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import org.apache.solr.client.solrj.beans.Field;
-import org.springframework.data.cassandra.mapping.Column;
-
 public class ReqDoctorProfileDTO {
 	private UUID id;
 	

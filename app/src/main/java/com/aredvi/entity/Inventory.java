@@ -3,7 +3,6 @@ package com.aredvi.entity;
 import java.io.Serializable;
 import java.util.UUID;
 
-import org.apache.solr.client.solrj.beans.Field;
 import org.springframework.cassandra.core.PrimaryKeyType;
 import org.springframework.data.cassandra.mapping.Column;
 import org.springframework.data.cassandra.mapping.PrimaryKeyColumn;
@@ -17,63 +16,48 @@ public class Inventory implements Serializable{
 	 */
 	private static final long serialVersionUID = -2702723316973008802L;
 	
-	@Field("id")
 	@PrimaryKeyColumn(name = "id",ordinal = 1,type = PrimaryKeyType.PARTITIONED)
 	private UUID id;
 	
-	@Field("googleid")
 	@Column(value = "google_id")
 	private String googleId;
 	
-	@Field("placeid")
 	@Column(value = "place_id")
 	private String placeId;
 	
-	@Field("solarid")
 	@Column(value = "solar_id")
 	private String solarId;
 
-	@Field("fullname")
 	@Column(value = "full_name")
 	private String fullname;
 	
-	@Field("profile")
 	@Column(value = "profile")
 	private String profile;
 	
-	@Field("profile_delted")
 	@Column(value = "profile_delted")
 	private boolean profileDelted;
 	
-	@Field("varified")
 	@Column(value = "varified")
 	private boolean varified;
 	
-	@Field("specialities")
 	@Column(value = "specialities")
 	private String specialities;
 	
-	@Field("lat")
 	@Column(value = "lat")
 	private String lat;
 	
-	@Field("longs")
 	@Column(value = "longs")
 	private String longs;
 	
-	@Field("address")
 	@Column(value = "address")
 	private String address;
 	
-	@Field("phone")
 	@Column(value = "phone")
 	private String phone;
 	
-	@Field("type")
 	@Column(value = "type")
 	private String type;
 	
-	@Field("mobile")
 	@Column(value = "mobile")
 	private String mobile;
 	

@@ -98,7 +98,7 @@
 		</property>
 	</bean>
 	
-	<solr:repositories base-package="com.aredvi.entity"  multicore-support="true"/>
+	<solr:repositories base-package="com.aredvi.solr"  multicore-support="true"/>
 	
 	<solr:solr-server id="solrServer" url="${solr.server.url}" maxConnections="100000" timeout="1500"/>
 	<bean id="solrTemplate" class="org.springframework.data.solr.core.SolrTemplate">

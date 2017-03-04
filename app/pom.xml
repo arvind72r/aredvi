@@ -38,8 +38,15 @@
 			<artifactId>spring-tx</artifactId>
 			<version>4.0.2.RELEASE</version>
 		</dependency>
+		
+		<!-- Google Map -->
+		<dependency>
+    		<groupId>com.google.maps</groupId>
+    		<artifactId>google-maps-services</artifactId>
+    		<version>0.1.1</version>
+		</dependency>
 
-
+		<!-- End -->
 		<!-- Tiles Dependecy -->
 
 		<!-- End -->

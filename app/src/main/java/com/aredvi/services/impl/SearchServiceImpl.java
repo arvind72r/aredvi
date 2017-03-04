@@ -27,6 +27,7 @@ import com.aredvi.utils.UtilityService;
 public class SearchServiceImpl implements SearchService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SearchServiceImpl.class);
+	
 
 	@Override
 	public List<Place> autocomplete(String input) {
