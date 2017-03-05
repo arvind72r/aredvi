@@ -108,7 +108,7 @@
 	    <constructor-arg ref="solrServer" />
 	    <constructor-arg name="cores">
 	        <list>
-	            <value>aredvisolr</value>
+	            <value>aredvi</value>
 	        </list>
 	    </constructor-arg>
 	</bean>

@@ -58,9 +58,6 @@ public class PreAuthFilter extends AbstractPreAuthenticatedProcessingFilter {
 		}
 	}
 
-
-
-
 	@Override
 	protected Object getPreAuthenticatedCredentials(HttpServletRequest pRequest) {
 		return "socialUser";

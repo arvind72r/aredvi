@@ -4,10 +4,11 @@ import java.io.Serializable;
 
 import org.apache.solr.client.solrj.beans.Field;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.cassandra.mapping.Table;
+import org.springframework.data.solr.core.mapping.Indexed;
+import org.springframework.data.solr.core.mapping.SolrDocument;
 
 
-@Table("inventory")
+@SolrDocument(solrCoreName = "aredvi")
 public class Inventory implements Serializable{
 	/**
 	 * 
@@ -24,16 +25,13 @@ public class Inventory implements Serializable{
 	@Field("solarid")
 	private String solarId;
 
-	@Field("fullname")
-	private String fullname;
-	
 	@Field("fname")
 	private String fname;
 	
 	@Field("profile")
 	private String profile;
 	
-	@Field("profile_delted")
+	@Field("p_delted")
 	private boolean profileDelted;
 	
 	@Field("varified")
@@ -42,11 +40,8 @@ public class Inventory implements Serializable{
 	@Field("specialities")
 	private String specialities;
 	
-	@Field("lat")
-	private String lat;
-	
-	@Field("longs")
-	private String longs;
+	@Indexed(name="locp", type="location")
+	private String locp;
 	
 	@Field("address")
 	private String address;
@@ -60,16 +55,8 @@ public class Inventory implements Serializable{
 	@Field("mobile")
 	private String mobile;
 	
-	
+	@Field("city")
 	private String city;
-
-	public String getFullname() {
-		return fullname;
-	}
-
-	public void setFullname(String fullname) {
-		this.fullname = fullname;
-	}
 
 	public String getProfile() {
 		return profile;
@@ -101,22 +88,6 @@ public class Inventory implements Serializable{
 
 	public void setSpecialities(String specialities) {
 		this.specialities = specialities;
-	}
-
-	public String getLat() {
-		return lat;
-	}
-
-	public void setLat(String lat) {
-		this.lat = lat;
-	}
-
-	public String getLongs() {
-		return longs;
-	}
-
-	public void setLongs(String longs) {
-		this.longs = longs;
 	}
 
 	public String getAddress() {

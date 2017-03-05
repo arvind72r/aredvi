@@ -19,6 +19,8 @@ import com.aredvi.entity.Doctor;
 import com.aredvi.exceptions.AredviException;
 import com.aredvi.repository.DoctorRepo;
 import com.aredvi.services.interfaces.DoctorService;
+import com.aredvi.services.interfaces.InventorySolarService;
+import com.aredvi.solr.Inventory;
 import com.aredvi.utils.ResponseFormatter;
 
 @RestController
@@ -27,6 +29,9 @@ public class DoctorController {
 
 	@Resource(name = "doctorService")
 	private DoctorService doctorService;
+	
+	@Resource(name="inventorySolarService")
+	private InventorySolarService inventorySolarService;
 	
 	@Autowired
 	DoctorRepo doctorRepo;
@@ -74,5 +79,27 @@ public class DoctorController {
 		resp.setResponseData(doctors);
 		return resp;
 	}
+	
+	@RequestMapping(value = "/addInventorySolr", method = RequestMethod.PUT)
+	public void addInventory() throws AredviException {
+		
+		Inventory inventory= new Inventory();
+		inventory.setFname("VisHnu BHAgat");
+		
+		inventorySolarService.addInventoryProfile(inventory);
+		
+	}
+	
+	@RequestMapping(value = "/searchSolr", method = RequestMethod.PUT)
+	public void searchInventory() throws AredviException {
+		
+		Inventory inventory= new Inventory();
+		inventory.setFname("VisHnu BHAgat");
+		
+		inventorySolarService.addInventoryProfile(inventory);
+		
+	}
+	
+	//-------------------------------------------------------------------------------//
 
 }
