@@ -84,19 +84,45 @@ public class DoctorController {
 	public void addInventory() throws AredviException {
 		
 		Inventory inventory= new Inventory();
-		inventory.setFname("VisHnu BHAgat");
+		inventory.setFname("Doc");
+		inventory.setLocp("19.1750649,73.0242481");
+		
+		Inventory inventory1= new Inventory();
+		inventory1.setFname("Doc1");
+		inventory1.setLocp("19.175489,73.0233738");
+		
+		Inventory inventory2= new Inventory();
+		inventory2.setFname("Doc2");
+		inventory2.setLocp("19.174359,73.024012");
+		
+		
+		
+		Inventory inventory3= new Inventory();
+		inventory3.setFname("Doc3");
+		inventory3.setLocp("1.1750649,7.0242481");
+		
+		Inventory inventory4= new Inventory();
+		inventory4.setFname("Doc4");
+		inventory4.setLocp("1.1750649,7.0242481");
+		
+		Inventory inventory5= new Inventory();
+		inventory5.setFname("Doc5");
+		inventory5.setLocp("1.1750649,3.0242481");
 		
 		inventorySolarService.addInventoryProfile(inventory);
+		inventorySolarService.addInventoryProfile(inventory1);
+		inventorySolarService.addInventoryProfile(inventory2);
+		inventorySolarService.addInventoryProfile(inventory3);
+		inventorySolarService.addInventoryProfile(inventory4);
+		inventorySolarService.addInventoryProfile(inventory5);
 		
 	}
 	
 	@RequestMapping(value = "/searchSolr", method = RequestMethod.PUT)
 	public void searchInventory() throws AredviException {
 		
-		Inventory inventory= new Inventory();
-		inventory.setFname("VisHnu BHAgat");
 		
-		inventorySolarService.addInventoryProfile(inventory);
+		//inventorySolarService.addInventoryProfile(inventory5);
 		
 	}
 	
