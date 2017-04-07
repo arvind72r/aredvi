@@ -6,7 +6,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import javax.annotation.Resource;
 
@@ -17,10 +16,10 @@ import com.aredvi.dto.request.ReqLoginDTO;
 import com.aredvi.dto.request.ReqUserProfileDTO;
 import com.aredvi.dto.response.RespLoginDTO;
 import com.aredvi.dto.response.RespUserProfileDTO;
-import com.aredvi.entity.User;
-import com.aredvi.entity.UserLogin;
 import com.aredvi.exceptions.AredviException;
 import com.aredvi.services.interfaces.UserService;
+import com.aredvi.sqlentity.User;
+import com.aredvi.sqlentity.UserLogin;
 import com.aredvi.utils.Roles;
 
 @Service("userService")
@@ -48,7 +47,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public RespUserProfileDTO getUserProfile(UUID usrId) throws AredviException {
+	public RespUserProfileDTO getUserProfile(int usrId) throws AredviException {
 		RespUserProfileDTO respUserProfileDTO = new RespUserProfileDTO();
 		User user = userDAO.getUserProfile(usrId);
 		respUserProfileDTO = convertEntityToResponse(user);
@@ -89,39 +88,27 @@ public class UserServiceImpl implements UserService {
 	
 	public void swapData(User user,ReqUserProfileDTO requestData){
 		if(null != requestData){
-			user.setAllergies(requestData.getAllergies());
 			user.setCity(requestData.getCity());
 			user.setDob(requestData.getDob());
 			user.setEmail(requestData.getEmail());
-			user.setFamilyPhysician(requestData.getFamilyPhysician());
 			user.setFname(requestData.getFname());
 			user.setGender(requestData.getGender());
-			if(null != requestData.getId()){
-			user.setId(requestData.getId());
-			}
 			user.setLname(requestData.getLname());
-			user.setParentId(requestData.getParentId());
 			user.setMobileNumber(requestData.getMobileNumber());
 			user.setType(requestData.getType());
-			user.setUserLoginId(requestData.getUserLoginId());
 		}
 	}
 	
 	public void swapData(RespUserProfileDTO respData, User user){
 		if(null != user){
-		respData.setAllergies(user.getAllergies());
 		respData.setCity(user.getCity());
 		respData.setDob(user.getDob());
 		respData.setEmail(user.getEmail());
-		respData.setFamilyPhysician(user.getFamilyPhysician());
 		respData.setFname(user.getFname());
 		respData.setGender(user.getGender());
-		respData.setId(user.getId());
 		respData.setLname(user.getLname());
-		respData.setParentId(user.getParentId());
 		respData.setMobileNumber(user.getMobileNumber());
 		respData.setType(user.getType());
-		respData.setUserLoginId(user.getUserLoginId());
 		}
 	}
 
@@ -156,10 +143,10 @@ public class UserServiceImpl implements UserService {
 		roles.add(Roles.ROLE_USER.getRole());
 		userLogin.setPassword(getMD5(reqLoginDTO.getPassword()));
 		userLogin.setUserName(reqLoginDTO.getUserName());
-		userLogin.setRoles(roles);
+		// userLogin.setRoles(roles);
 		userLogin.setCreatedOn(new Date());
 		if(null != reqLoginDTO.getUserLoginId()){
-			userLogin.setId(reqLoginDTO.getUserLoginId());
+			// userLogin.setId(reqLoginDTO.getUserLoginId());
 			userLogin.setUpdatedOn(new Date());
 		}
 	}

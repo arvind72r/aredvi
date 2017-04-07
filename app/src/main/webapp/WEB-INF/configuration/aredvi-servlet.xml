@@ -29,8 +29,8 @@
 
 
 	<context:component-scan base-package="com.aredvi" /> 
-	<cassandra:repositories base-package="com.aredvi.repository" />
-  	<cassandra:mapping entity-base-packages="com.aredvi.entity" />
+	<!-- <cassandra:repositories base-package="com.aredvi.repository" />
+  	<cassandra:mapping entity-base-packages="com.aredvi.entity" /> -->
 	<context:annotation-config />
 	<mvc:annotation-driven />
 	<mvc:resources location="/WEB-INF/utils/" mapping="/utils/**" />
@@ -76,17 +76,17 @@
   	</bean>
 
   <!-- REQUIRED: The Cassandra Cluster -->
-  <cassandra:cluster id="cassandraCluster" contact-points="${cassandra.contactpoints}"  port="${cassandra.port}" />
+  <!-- <cassandra:cluster id="cassandraCluster" contact-points="${cassandra.contactpoints}"  port="${cassandra.port}" /> -->
 
   <!-- REQUIRED: The Cassandra Session, built from the Cluster, and attaching 
     to a keyspace -->
-  <cassandra:session id="cassandraSession" keyspace-name="${cassandra.keyspace}" />
+ <!--  <cassandra:session id="cassandraSession" keyspace-name="${cassandra.keyspace}" /> -->
 
   <!-- REQUIRED: The Default Cassandra Converter used by CassandraTemplate -->
-  <cassandra:converter />  
+  <!-- <cassandra:converter />   -->
 
   <!-- REQUIRED: The Cassandra Template is the building block of all Spring Data Cassandra -->
-  <cassandra:template id="cqlTemplate" />
+  <!-- <cassandra:template id="cqlTemplate" /> -->
 
 	<bean id="velocityEngine"
 		class="org.springframework.ui.velocity.VelocityEngineFactoryBean">

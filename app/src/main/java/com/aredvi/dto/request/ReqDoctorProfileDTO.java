@@ -3,14 +3,13 @@ package com.aredvi.dto.request;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 public class ReqDoctorProfileDTO {
-	private UUID id;
+	private int id;
 	
-	private UUID userId;
+	private int userId;
 	
-	private UUID userLoginId;
+	private int userLoginId;
 	
 	private String fname;
 	
@@ -57,14 +56,6 @@ public class ReqDoctorProfileDTO {
 	private String googleId;
 	
 	private String placeId;
-
-	public UUID getId() {
-		return id;
-	}
-
-	public void setId(UUID id) {
-		this.id = id;
-	}
 
 	public String getFname() {
 		return fname;
@@ -170,14 +161,6 @@ public class ReqDoctorProfileDTO {
 		this.documents = documents;
 	}
 
-	public UUID getUserId() {
-		return userId;
-	}
-
-	public void setUserId(UUID userId) {
-		this.userId = userId;
-	}
-
 	public Date getDob() {
 		return dob;
 	}
@@ -208,14 +191,6 @@ public class ReqDoctorProfileDTO {
 
 	public void setPhoneNumber(List<String> phoneNumber) {
 		this.phoneNumber = phoneNumber;
-	}
-
-	public UUID getUserLoginId() {
-		return userLoginId;
-	}
-
-	public void setUserLoginId(UUID userLoginId) {
-		this.userLoginId = userLoginId;
 	}
 
 	public String getLat() {
@@ -264,6 +239,30 @@ public class ReqDoctorProfileDTO {
 
 	public void setPlaceId(String placeId) {
 		this.placeId = placeId;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public int getUserLoginId() {
+		return userLoginId;
+	}
+
+	public void setUserLoginId(int userLoginId) {
+		this.userLoginId = userLoginId;
 	}
 	
 }

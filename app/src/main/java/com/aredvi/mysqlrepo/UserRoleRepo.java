@@ -1,4 +1,4 @@
-package com.aredvi.repository;
+package com.aredvi.mysqlrepo;
 
 import java.util.Set;
 import java.util.UUID;
@@ -11,7 +11,7 @@ import com.aredvi.entity.UserRole;
 
 public interface UserRoleRepo extends CassandraRepository<UserRole>{
 
-	@Query("Select * from userrole where user_id=?0 ALLOW FILTERING")
+	@Query("Select * from userrole where user_id=?0")
 	public Set<UserRole> findByUserId(UUID id);
 
 }

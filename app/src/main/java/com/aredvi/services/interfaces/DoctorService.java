@@ -1,7 +1,5 @@
 package com.aredvi.services.interfaces;
 
-import java.util.UUID;
-
 import com.aredvi.dto.request.ReqDoctorProfileDTO;
 import com.aredvi.dto.response.RespDoctorProfileDTO;
 import com.aredvi.exceptions.AredviException;
@@ -11,6 +9,6 @@ public interface DoctorService {
 
 	RespDoctorProfileDTO updateDoctorProfile(ReqDoctorProfileDTO requestData) throws AredviException;
 
-	RespDoctorProfileDTO getDoctorProfile(UUID usrId) throws AredviException;
+	RespDoctorProfileDTO getDoctorProfile(int usrId) throws AredviException;
 
 }

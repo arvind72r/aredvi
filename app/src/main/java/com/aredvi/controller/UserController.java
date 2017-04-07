@@ -1,7 +1,6 @@
 package com.aredvi.controller;
 
 import java.util.List;
-import java.util.UUID;
 
 import javax.annotation.Resource;
 
@@ -17,10 +16,10 @@ import com.aredvi.dto.request.ReqLoginDTO;
 import com.aredvi.dto.request.ReqUserProfileDTO;
 import com.aredvi.dto.response.RespLoginDTO;
 import com.aredvi.dto.response.RespUserProfileDTO;
-import com.aredvi.entity.UserLogin;
 import com.aredvi.exceptions.AredviException;
 import com.aredvi.exceptions.InvalidRequestException;
 import com.aredvi.services.interfaces.UserService;
+import com.aredvi.sqlentity.UserLogin;
 import com.aredvi.utils.RequestFormatter;
 import com.aredvi.utils.ResponseFormatter;
 
@@ -104,7 +103,7 @@ public class UserController extends AredviController{
 
 	@Secured("ROLE_USER")
 	@RequestMapping(value = "/findprofile", method = RequestMethod.GET)
-	public ResponseFormatter<RespUserProfileDTO> getUserProfile(@RequestParam UUID usrId) throws AredviException {
+	public ResponseFormatter<RespUserProfileDTO> getUserProfile(@RequestParam int usrId) throws AredviException {
 		RespUserProfileDTO respUserProfileDTO = usrService.getUserProfile(usrId);
 		ResponseFormatter<RespUserProfileDTO> resp = new ResponseFormatter<RespUserProfileDTO>();
 		resp.setResponseData(respUserProfileDTO);

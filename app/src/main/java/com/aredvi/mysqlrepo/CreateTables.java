@@ -1,4 +1,4 @@
-package com.aredvi.repository;
+package com.aredvi.mysqlrepo;
 
 public class CreateTables {
 	public static final String AUTHORITY = "CREATE TABLE authority(id uuid, role text, authorities list<text>, "

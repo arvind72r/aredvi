@@ -1,10 +1,9 @@
 package com.aredvi.dao.interfaces;
 
 import java.util.List;
-import java.util.UUID;
 
-import com.aredvi.entity.User;
-import com.aredvi.entity.UserLogin;
+import com.aredvi.sqlentity.User;
+import com.aredvi.sqlentity.UserLogin;
 import com.aredvi.exceptions.AredviException;
 
 public interface UserDAO {
@@ -13,7 +12,7 @@ public interface UserDAO {
 
 	User updateUserProfile(User user) throws AredviException;
 
-	User getUserProfile(UUID usrId) throws AredviException;
+	User getUserProfile(int usrId) throws AredviException;
 
 	List<User> searchUserByType(String name) throws AredviException;
 

@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
 
-import com.aredvi.entity.UserLogin;
+import com.aredvi.sqlentity.UserLogin;
 import com.aredvi.exceptions.AredviException;
 import com.aredvi.services.interfaces.UserService;
 import com.aredvi.utils.UtilityService;

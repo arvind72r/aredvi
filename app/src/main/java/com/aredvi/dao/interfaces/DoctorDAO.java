@@ -1,8 +1,6 @@
 package com.aredvi.dao.interfaces;
 
-import java.util.UUID;
-
-import com.aredvi.entity.Doctor;
+import com.aredvi.sqlentity.Doctor;
 import com.aredvi.exceptions.AredviException;
 
 public interface DoctorDAO {
@@ -10,5 +8,5 @@ public interface DoctorDAO {
 
 	Doctor updateDoctorProfile(Doctor doctor) throws AredviException;
 
-	Doctor getDoctorProfile(UUID usrId) throws AredviException;
+	Doctor getDoctorProfile(int usrId) throws AredviException;
 }

@@ -1,26 +1,12 @@
 package com.aredvi.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.cassandra.core.CassandraOperations;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.aredvi.entity.Authority;
-import com.aredvi.entity.UserLogin;
-import com.aredvi.entity.UserRole;
-import com.aredvi.exceptions.AredviException;
-import com.aredvi.repository.CreateTables;
-import com.aredvi.repository.Createindexes;
 
 
 @RestController
 @RequestMapping(value = "/datas")
-public class CreateDataController extends AredviController {
+public class CreateDataController extends AredviController {/*
 	@Autowired
 	private CassandraOperations cassandraOperations;
 	
@@ -57,4 +43,4 @@ public class CreateDataController extends AredviController {
 		UserRole userRole = new UserRole(userLogin.getId(),"ROLE_USER");
 		cassandraOperations.insert(userRole);
 	}
-}
+*/}
