@@ -43,7 +43,7 @@ public class Speciality implements Serializable{
 	}
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "aredvi_user_xid")
+	@JoinColumn(name = "doctor_xid")
 	public Doctor getDoctor() {
 		return doctor;
 	}

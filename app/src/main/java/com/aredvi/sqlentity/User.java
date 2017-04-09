@@ -45,9 +45,11 @@ public class User implements Serializable{
 	
 	private String gender;
 	
-	private String type;
+	private String type; // reception, User, Doctor
 	
 	private UserLogin userLogin;
+	
+	private String photo;
 	
 	private Set<Phone> phone = new HashSet<Phone>(0);
 	
@@ -207,4 +209,15 @@ public class User implements Serializable{
 	public void setUserLogin(UserLogin userLogin) {
 		this.userLogin = userLogin;
 	}
+
+	@Column(name = "photo")
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+	
+	
 }

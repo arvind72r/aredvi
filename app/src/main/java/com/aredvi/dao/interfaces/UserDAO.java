@@ -18,10 +18,4 @@ public interface UserDAO {
 
 	List<User> searchUserByName(String name) throws AredviException;
 
-	UserLogin findByAuthId(String authid) throws AredviException;
-
-	UserLogin createLogin(UserLogin usrLogin) throws AredviException;
-
-	UserLogin findByUserName(String userName) throws AredviException;
-
 }

@@ -1,6 +1,8 @@
 package com.aredvi.sqlentity;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,6 +29,9 @@ public class UserRole implements Serializable{
 	private String role;
 	
 	UserLogin userLogin;
+	
+	private Set<Authority> authority = new HashSet<Authority>(0);
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -55,6 +61,15 @@ public class UserRole implements Serializable{
 
 	public void setUserLogin(UserLogin userLogin) {
 		this.userLogin = userLogin;
+	}
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "userRole")
+	public Set<Authority> getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(Set<Authority> authority) {
+		this.authority = authority;
 	}
 	
 }

@@ -129,7 +129,7 @@ public class UserLogin implements Serializable{
 		this.authProvider = authProvider;
 	}
 	
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "userLogin")
+	@OneToOne(fetch = FetchType.EAGER, mappedBy = "userLogin")
 	public User getUser() {
 		return user;
 	}

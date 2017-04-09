@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import com.aredvi.dao.interfaces.UserDAO;
 import com.aredvi.exceptions.AredviException;
 import com.aredvi.sqlentity.User;
-import com.aredvi.sqlentity.UserLogin;
 
 @Repository("userDAO")
 public class UserDAOImpl implements UserDAO {
@@ -36,21 +35,6 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public List<User> searchUserByName(String name) throws AredviException {
 		return (List<User>)sessionFactory.getCurrentSession().get(User.class,name);
-	}
-
-	@Override
-	public UserLogin findByAuthId(String authid) throws AredviException {
-		return (UserLogin)sessionFactory.getCurrentSession().get(User.class,authid);
-	}
-
-	@Override
-	public UserLogin createLogin(UserLogin usrLogin) throws AredviException {
-		return (UserLogin)sessionFactory.getCurrentSession().get(User.class,usrLogin);
-	}
-
-	@Override
-	public UserLogin findByUserName(String userName) throws AredviException {
-		return (UserLogin)sessionFactory.getCurrentSession().get(User.class,userName);
 	}
 
 	@Override

@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.aredvi.dao.interfaces.UserDAO;
+import com.aredvi.dao.interfaces.UserLoginDAO;
 import com.aredvi.dto.request.ReqLoginDTO;
 import com.aredvi.dto.request.ReqUserProfileDTO;
 import com.aredvi.dto.response.RespLoginDTO;
@@ -27,13 +28,16 @@ public class UserServiceImpl implements UserService {
 
 	@Resource(name = "userDAO")
 	private UserDAO userDAO;
+	
+	@Resource(name = "userLoginDAO")
+	UserLoginDAO userLoginDAO;
 
 	@Override
 	public RespUserProfileDTO addUserProfile(ReqUserProfileDTO requestData) throws AredviException {
 		RespUserProfileDTO respUserProfileDTO = new RespUserProfileDTO();
 		User user = convertRequestToEntity(requestData);
 		user = userDAO.addUserProfile(user);
-		swapData(respUserProfileDTO,user);
+		swapData(respUserProfileDTO, user);
 		return respUserProfileDTO;
 	}
 
@@ -42,7 +46,7 @@ public class UserServiceImpl implements UserService {
 		RespUserProfileDTO respUserProfileDTO = new RespUserProfileDTO();
 		User user = convertRequestToEntity(requestData);
 		user = userDAO.updateUserProfile(user);
-		swapData(respUserProfileDTO,user);
+		swapData(respUserProfileDTO, user);
 		return respUserProfileDTO;
 	}
 
@@ -76,18 +80,18 @@ public class UserServiceImpl implements UserService {
 
 	public User convertRequestToEntity(ReqUserProfileDTO requestData) throws AredviException {
 		User user = new User();
-		swapData(user,requestData);
+		swapData(user, requestData);
 		return user;
 	}
 
 	public RespUserProfileDTO convertEntityToResponse(User user) throws AredviException {
 		RespUserProfileDTO respUserProfileDTO = new RespUserProfileDTO();
-		swapData(respUserProfileDTO,user);
+		swapData(respUserProfileDTO, user);
 		return respUserProfileDTO;
 	}
-	
-	public void swapData(User user,ReqUserProfileDTO requestData){
-		if(null != requestData){
+
+	public void swapData(User user, ReqUserProfileDTO requestData) {
+		if (null != requestData) {
 			user.setCity(requestData.getCity());
 			user.setDob(requestData.getDob());
 			user.setEmail(requestData.getEmail());
@@ -98,30 +102,18 @@ public class UserServiceImpl implements UserService {
 			user.setType(requestData.getType());
 		}
 	}
-	
-	public void swapData(RespUserProfileDTO respData, User user){
-		if(null != user){
-		respData.setCity(user.getCity());
-		respData.setDob(user.getDob());
-		respData.setEmail(user.getEmail());
-		respData.setFname(user.getFname());
-		respData.setGender(user.getGender());
-		respData.setLname(user.getLname());
-		respData.setMobileNumber(user.getMobileNumber());
-		respData.setType(user.getType());
+
+	public void swapData(RespUserProfileDTO respData, User user) {
+		if (null != user) {
+			respData.setCity(user.getCity());
+			respData.setDob(user.getDob());
+			respData.setEmail(user.getEmail());
+			respData.setFname(user.getFname());
+			respData.setGender(user.getGender());
+			respData.setLname(user.getLname());
+			respData.setMobileNumber(user.getMobileNumber());
+			respData.setType(user.getType());
 		}
-	}
-
-	@Override
-	public UserLogin findByAuthId(String authid) throws AredviException {
-		UserLogin userLogin = userDAO.findByAuthId(authid);
-		return userLogin;
-	}
-
-	@Override
-	public UserLogin createLogin(UserLogin usrLogin) throws AredviException {
-		UserLogin userLogin = userDAO.createLogin(usrLogin);
-		return userLogin;
 	}
 
 	@Override
@@ -130,7 +122,7 @@ public class UserServiceImpl implements UserService {
 		RespLoginDTO respLoginDTO = new RespLoginDTO();
 		convertRequestToEntity(userLogin, reqLoginDTO);
 		userLogin = createLogin(userLogin);
-		convertRequestToEntity(respLoginDTO,userLogin);
+		convertRequestToEntity(respLoginDTO, userLogin);
 		return respLoginDTO;
 	}
 
@@ -145,31 +137,41 @@ public class UserServiceImpl implements UserService {
 		userLogin.setUserName(reqLoginDTO.getUserName());
 		// userLogin.setRoles(roles);
 		userLogin.setCreatedOn(new Date());
-		if(null != reqLoginDTO.getUserLoginId()){
+		if (null != reqLoginDTO.getUserLoginId()) {
 			// userLogin.setId(reqLoginDTO.getUserLoginId());
 			userLogin.setUpdatedOn(new Date());
 		}
 	}
 
+
+	public static String getMD5(String input) {
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			byte[] messageDigest = md.digest(input.getBytes());
+			BigInteger number = new BigInteger(1, messageDigest);
+			String hashtext = number.toString(16);
+			while (hashtext.length() < 32) {
+				hashtext = "0" + hashtext;
+			}
+			return hashtext;
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
+	public UserLogin createLogin(UserLogin usrLogin) throws AredviException {
+		return userLoginDAO.createLogin(usrLogin);
+	}
+
 	@Override
 	public UserLogin findByUserName(String userName) throws AredviException {
-		return userDAO.findByUserName(userName);
+		return userLoginDAO.findByUserName(userName);
 	}
-	
-	
-	public static String getMD5(String input) {
-    try {
-        MessageDigest md = MessageDigest.getInstance("MD5");
-        byte[] messageDigest = md.digest(input.getBytes());
-        BigInteger number = new BigInteger(1, messageDigest);
-        String hashtext = number.toString(16);
-        while (hashtext.length() < 32) {
-            hashtext = "0" + hashtext;
-        }
-        return hashtext;
-    }
-    catch (NoSuchAlgorithmException e) {
-        throw new RuntimeException(e);
-    }
-}
+
+	@Override
+	public UserLogin findByAuthId(String authid) throws AredviException {
+		return userLoginDAO.findByAuthId(authid);
+	}
+
 }

@@ -5,7 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -14,25 +15,34 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.aredvi.entity.Authority;
-import com.aredvi.entity.UserLogin;
-import com.aredvi.repository.AuthorityRepo;
-import com.aredvi.repository.UserLoginRepo;
+import com.aredvi.dao.interfaces.AuthorityDAO;
+import com.aredvi.dao.interfaces.UserLoginDAO;
+import com.aredvi.exceptions.AredviException;
+import com.aredvi.sqlentity.Authority;
+import com.aredvi.sqlentity.UserLogin;
+import com.aredvi.sqlentity.UserRole;
 
 @Service("customPreAuthUserDetailsService")
 public class CustomPreAuthUserDetailsServiceImpl implements UserDetailsService {
 	
-	@Autowired
-	UserLoginRepo userLoginRepo;
+	@Resource(name = "userLoginDAO")
+	UserLoginDAO userLoginDAO;
 	
-	@Autowired
-	AuthorityRepo authorityRepo;
+	@Resource(name = "authorityDAO")
+	AuthorityDAO authorityDAO;
+	
 	
 	@Override
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
 		String password = "social";
-		UserLogin userLogin = userLoginRepo.findByUserName(username);
+		UserLogin userLogin =null;
+		try {
+			userLogin = userLoginDAO.findByUserName(username);
+		} catch (AredviException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (userLogin != null) {
 			password = userLogin.getPassword();
 			if(password == null ) {
@@ -41,8 +51,8 @@ public class CustomPreAuthUserDetailsServiceImpl implements UserDetailsService {
 				throw new UsernameNotFoundException("Password is blank");
 			}
 			Set<Authority> vAuthority = new HashSet<Authority>();
-			for(String role : userLogin.getRoles()){
-				vAuthority.add(authorityRepo.finByRole(role));
+			for(UserRole role : userLogin.getUserRole()){
+				vAuthority.add(authorityDAO.finByRole(role.getRole()));
 			}
 			boolean enabled = true;
 			boolean accountNonExpired = true;
@@ -50,22 +60,20 @@ public class CustomPreAuthUserDetailsServiceImpl implements UserDetailsService {
 			boolean accountNonLocked = true;
 			return new User(userLogin.getUserName(), userLogin.getPassword(), 
 					enabled, accountNonExpired, credentialsNonExpired, accountNonLocked,
-					getAuthorities(userLogin.getRoles(),vAuthority));
+					getAuthorities(userLogin.getUserRole(),vAuthority));
 		} else {
 			throw new UsernameNotFoundException("could not find the user '" + username + "'");
 		}
 	}
 
-	public List<GrantedAuthority> getAuthorities(List<String> roles, Set<Authority> authority){
+	public List<GrantedAuthority> getAuthorities(Set<UserRole> roles, Set<Authority> authority){
 		List<GrantedAuthority> vAuthorities = new ArrayList<GrantedAuthority>();
-		for(String role: roles){
-			vAuthorities.add(new SimpleGrantedAuthority(role));
+		for(UserRole role: roles){
+			vAuthorities.add(new SimpleGrantedAuthority(role.getRole()));
 		}
 		if(authority != null && !authority.isEmpty()) {
 			for(Authority rap : authority) {
-				for(String permission : rap.getAuthorities()) {
-					vAuthorities.add(new SimpleGrantedAuthority(permission));
-				}
+					vAuthorities.add(new SimpleGrantedAuthority(rap.getAuth()));
 			}
 		}
 		return vAuthorities;

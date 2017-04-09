@@ -48,6 +48,8 @@ public class Doctor implements Serializable{
 	
 	private Set<Speciality> speciality = new HashSet<Speciality>(0);
 	
+	private Set<Consultation> consultation = new HashSet<Consultation>(0);
+	
 	private User user;
 	
 	@Id
@@ -162,4 +164,12 @@ public class Doctor implements Serializable{
 		this.user = user;
 	}
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "doctor")
+	public Set<Consultation> getConsultation() {
+		return consultation;
+	}
+
+	public void setConsultation(Set<Consultation> consultation) {
+		this.consultation = consultation;
+	}
 }

@@ -21,12 +21,12 @@ public interface UserService {
 
 	List<RespUserProfileDTO> searchUserByType(String type) throws AredviException;
 
-	UserLogin findByAuthId(String authid) throws AredviException;
-
 	UserLogin createLogin(UserLogin usrLogin) throws AredviException;
 
 	RespLoginDTO createLogin(ReqLoginDTO reqLoginDTO) throws AredviException;
 
 	UserLogin findByUserName(String userName) throws AredviException;
+
+	UserLogin findByAuthId(String authid) throws AredviException;
 
 }

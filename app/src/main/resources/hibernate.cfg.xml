@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC
 		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory name="aredvi_session">
-        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="hibernate.connection.password">user444aredvi</property>
-        <property name="hibernate.connection.url">jdbc:mysql://arevidb.cy9qfls9xclg.us-west-2.rds.amazonaws.com:3306/aredvidb</property>
+        <!-- <property name="hibernate.connection.url">jdbc:mysql://arevidb.cy9qfls9xclg.us-west-2.rds.amazonaws.com:3306/aredvidb</property> -->
+        <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/aredvidb</property>
         <property name="hibernate.connection.username">aredviuser</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.hbm2ddl.auto">create</property> 
@@ -15,6 +16,7 @@
         <mapping class="com.aredvi.sqlentity.UserLogin" />  
         <mapping class="com.aredvi.sqlentity.Doctor" />
         <mapping class="com.aredvi.sqlentity.UserRole" />
+        <mapping class="com.aredvi.sqlentity.Authority" />
         <mapping class="com.aredvi.sqlentity.Phone" />  
         <mapping class="com.aredvi.sqlentity.Address" />  
         <mapping class="com.aredvi.sqlentity.Allergy" />

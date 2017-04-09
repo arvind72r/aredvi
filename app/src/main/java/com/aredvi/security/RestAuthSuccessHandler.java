@@ -3,6 +3,7 @@ package com.aredvi.security;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,14 +17,15 @@ import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.util.StringUtils;
 
-import com.aredvi.entity.UserLogin;
-import com.aredvi.repository.UserLoginRepo;
+import com.aredvi.dao.interfaces.UserLoginDAO;
+import com.aredvi.exceptions.AredviException;
+import com.aredvi.sqlentity.UserLogin;
 
 
 public class RestAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 	
-	@Autowired
-	UserLoginRepo userLoginRepo;
+	@Resource(name = "userLoginDAO")
+	UserLoginDAO userLoginDAO;
 	
 	private RequestCache requestCache = new HttpSessionRequestCache();
 
@@ -34,13 +36,19 @@ public class RestAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandle
 	throws IOException, ServletException {
 		
 		SavedRequest savedRequest = requestCache.getRequest(request, response);
-		UserLogin userLogin =  userLoginRepo.findByUserName(authentication.getName());
+		UserLogin userLogin =null;
+		try {
+			userLogin = userLoginDAO.findByUserName(authentication.getName());
+		} catch (AredviException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		response.setContentType("application/json");
 		PrintWriter printWriter = response.getWriter();
 		JSONObject obj = new JSONObject();
 		obj.put("LoginResponse", "Success");
-		obj.put("userId", userLogin.getId());
+		obj.put("userId", userLogin.getUser().getUserId());
 		obj.put("verified",userLogin.isVerified());
 		obj.put("lock", userLogin.isLock());
 		
