@@ -1,23 +1,16 @@
 package com.aredvi.mysqlrepo;
 
 import java.util.List;
-import java.util.UUID;
 
-import org.springframework.data.cassandra.repository.CassandraRepository;
-import org.springframework.data.cassandra.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 
-import com.aredvi.entity.User;
+import com.aredvi.sqlentity.User;
 
 
-public interface UserRepo extends CassandraRepository<User> {
-	
-	@Query("Select * from user where id=?0")
-	User findById(UUID usrId);
+public interface UserRepo extends CrudRepository<User,Integer> {
+	public List<User> findByType(String type);
 
-	@Query("Select * from user where name=?0")
-	List<User> findByName(String type);
+	public List<User> findByFname(String name);
 
-	@Query("Select * from user where type=?0")
-	List<User> findByType(String type);
-
+	public User findByUserId(int usrId);
 }

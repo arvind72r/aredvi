@@ -13,7 +13,10 @@
 	xmlns:solr="http://www.springframework.org/schema/data/solr"
 	xmlns:cassandra="http://www.springframework.org/schema/data/cassandra"
 	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/cql http://www.springframework.org/schema/cql/spring-cql-1.0.xsd
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="http://www.springframework.org/schema/data/jpa
+                           http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+	http://www.springframework.org/schema/cql http://www.springframework.org/schema/cql/spring-cql-1.0.xsd
 	 	http://www.springframework.org/schema/data/cassandra http://www.springframework.org/schema/data/cassandra/spring-cassandra.xsd
 		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
 		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
@@ -100,16 +103,16 @@
 		</property>
 	</bean>
 	
-	<bean id="dataSource"
+	<!-- <bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${mysql.driverClassName}" />
 		<property name="url" value="${mysql.databaseurl}" />
 		<property name="username" value="${mysql.username}" />
 		<property name="password" value="${mysql.password}" />
 	</bean>
-	<!-- <bean id="dataSource" class="com.mysql.jdbc.jdbc2.optional.MysqlDataSource" 
+	<bean id="dataSource" class="com.mysql.jdbc.jdbc2.optional.MysqlDataSource" 
 		destroy-method="close" p:driverClassName="${jdbc.driverClassName}" p:url="${jdbc.databaseurl}" 
-		p:username="${jdbc.username}" p:password="${jdbc.password}" /> -->
+		p:username="${jdbc.username}" p:password="${jdbc.password}" />
 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
@@ -120,18 +123,44 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">${mysql.dialect}</prop>
-				<!-- <prop key="hibernate.hbm2ddl.auto">create</prop> --> 
+				<prop key="hibernate.hbm2ddl.auto">create</prop> 
 				<prop key="hibernate.show_sql">true</prop>
 			</props>
 		</property>
-	</bean>
+	</bean> -->
 
-	<tx:annotation-driven proxy-target-class="true" />
-
-	<bean id="transactionManager"
+	<!-- <bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
+	</bean> -->
+	
+	
+	 <bean id="entityManagerFactoryBean" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+      <property name="dataSource" ref="dataSource" />
+      <property name="packagesToScan" value="com.aredvi.sqlentity" />
+      <property name="jpaVendorAdapter">
+         <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+      </property>
+      <property name="jpaProperties">
+         <props>
+            <prop key="hibernate.hbm2ddl.auto">validate</prop>
+            <prop key="hibernate.dialect">${mysql.dialect}</prop>
+         </props>
+      </property>
+   </bean>
+   <jpa:repositories base-package="com.aredvi.mysqlrepo" /> 
+   <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+      <property name="driverClassName" value="${mysql.driverClassName}" />
+      <property name="url" value="${mysql.databaseurl}" />
+      <property name="username" value="${jdbc.username}" />
+      <property name="password" value="${jdbc.password}" />
+   </bean>
+     
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+      <property name="entityManagerFactory" ref="entityManagerFactoryBean" />
+   </bean>
+   
+   <tx:annotation-driven proxy-target-class="true" />
 	
 	<solr:repositories base-package="com.aredvi.solr"  multicore-support="true"/>
 	

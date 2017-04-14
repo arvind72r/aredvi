@@ -1,13 +1,12 @@
 package com.aredvi.mysqlrepo;
 
-import org.springframework.data.cassandra.repository.CassandraRepository;
-import org.springframework.data.cassandra.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 
-import com.aredvi.entity.Authority;
+import com.aredvi.sqlentity.Authority;
 
 
-public interface AuthorityRepo extends CassandraRepository<Authority> {
+public interface AuthorityRepo extends CrudRepository<Authority,Integer> {
 
-	Authority finByRole(String role);
+	public Authority findByUserRole(String role);
 
 }
