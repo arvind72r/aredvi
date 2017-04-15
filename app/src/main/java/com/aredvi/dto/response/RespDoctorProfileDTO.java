@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.aredvi.dto.AddressDTO;
 import com.aredvi.dto.DocDocumentDTO;
 import com.aredvi.dto.PhoneDTO;
 import com.aredvi.dto.SpecialityDTO;
@@ -38,6 +39,8 @@ public class RespDoctorProfileDTO implements Serializable{
 	private Set<SpecialityDTO> speciality = new HashSet<SpecialityDTO>(0);
 	
 	private Set<PhoneDTO> phone = new HashSet<PhoneDTO>(0);
+	
+	private Set<AddressDTO> addresses = new HashSet<AddressDTO>(0);
 	
 	public int getDocID() {
 		return docID;
@@ -141,6 +144,14 @@ public class RespDoctorProfileDTO implements Serializable{
 
 	public void setPhone(Set<PhoneDTO> phone) {
 		this.phone = phone;
+	}
+
+	public Set<AddressDTO> getAddresses() {
+		return addresses;
+	}
+
+	public void setAddresses(Set<AddressDTO> addresses) {
+		this.addresses = addresses;
 	}
 
 }
