@@ -2,7 +2,14 @@ package com.aredvi.dto.request;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import com.aredvi.dto.AddressDTO;
+import com.aredvi.dto.AllergyDTO;
+import com.aredvi.dto.EmailDTO;
+import com.aredvi.dto.PhoneDTO;
 
 public class ReqUserProfileDTO implements Serializable{
 	private static final long serialVersionUID = 5395706710399504250L;
@@ -17,17 +24,11 @@ public class ReqUserProfileDTO implements Serializable{
 	
 	private Date dob;
 	
-	private String mobileNumber;
-	
-	private String email;
-	
 	private String gender;
 	
 	private String city;
 	
 	private String type;
-	
-	private List<String> allergies;
 	
 	private int parentId;
 	
@@ -39,7 +40,13 @@ public class ReqUserProfileDTO implements Serializable{
 	
 	private String confirmPassword;
 	
-	private String address;
+	private Set<PhoneDTO> phone = new HashSet<PhoneDTO>(0);
+	
+	private Set<AddressDTO> addresses = new HashSet<AddressDTO>(0);
+	
+	private Set<AllergyDTO> allergy = new HashSet<AllergyDTO>(0);
+	
+	private Set<EmailDTO> emails = new HashSet<EmailDTO>(0);
 
 
 	public String getFname() {
@@ -66,22 +73,6 @@ public class ReqUserProfileDTO implements Serializable{
 		this.dob = dob;
 	}
 
-	public String getMobileNumber() {
-		return mobileNumber;
-	}
-
-	public void setMobileNumber(String mobileNumber) {
-		this.mobileNumber = mobileNumber;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public String getGender() {
 		return gender;
 	}
@@ -104,14 +95,6 @@ public class ReqUserProfileDTO implements Serializable{
 
 	public void setType(String type) {
 		this.type = type;
-	}
-
-	public List<String> getAllergies() {
-		return allergies;
-	}
-
-	public void setAllergies(List<String> allergies) {
-		this.allergies = allergies;
 	}
 
 	public List<String> getFamilyPhysician() {
@@ -146,14 +129,6 @@ public class ReqUserProfileDTO implements Serializable{
 		this.confirmPassword = confirmPassword;
 	}
 
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
 	public int getId() {
 		return id;
 	}
@@ -176,6 +151,38 @@ public class ReqUserProfileDTO implements Serializable{
 
 	public void setParentId(int parentId) {
 		this.parentId = parentId;
+	}
+
+	public Set<PhoneDTO> getPhone() {
+		return phone;
+	}
+
+	public void setPhone(Set<PhoneDTO> phone) {
+		this.phone = phone;
+	}
+
+	public Set<AddressDTO> getAddresses() {
+		return addresses;
+	}
+
+	public void setAddresses(Set<AddressDTO> addresses) {
+		this.addresses = addresses;
+	}
+
+	public Set<AllergyDTO> getAllergy() {
+		return allergy;
+	}
+
+	public void setAllergy(Set<AllergyDTO> allergy) {
+		this.allergy = allergy;
+	}
+
+	public Set<EmailDTO> getEmails() {
+		return emails;
+	}
+
+	public void setEmails(Set<EmailDTO> emails) {
+		this.emails = emails;
 	}
 	
 }
