@@ -1,4 +1,4 @@
-package com.aredvi.dto.request;
+package com.aredvi.dto.response;
 
 public class RespPrescriptionDTO {
 

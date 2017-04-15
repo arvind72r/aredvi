@@ -5,8 +5,8 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.aredvi.dao.interfaces.PrescriptionDAO;
-import com.aredvi.dto.request.RespPrescriptionDTO;
-import com.aredvi.dto.response.ReqPrescriptionDTO;
+import com.aredvi.dto.request.ReqPrescriptionDTO;
+import com.aredvi.dto.response.RespPrescriptionDTO;
 import com.aredvi.exceptions.AredviException;
 import com.aredvi.services.interfaces.PrescriptionService;
 import com.aredvi.sqlentity.Prescription;

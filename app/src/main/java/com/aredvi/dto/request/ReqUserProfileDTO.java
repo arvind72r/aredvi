@@ -1,13 +1,15 @@
 package com.aredvi.dto.request;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
-public class ReqUserProfileDTO {
-	private UUID id;
+public class ReqUserProfileDTO implements Serializable{
+	private static final long serialVersionUID = 5395706710399504250L;
+
+	private int id;
 	
-	private UUID userLoginId;
+	private int userLoginId;
 	
 	private String fname;
 	
@@ -27,7 +29,7 @@ public class ReqUserProfileDTO {
 	
 	private List<String> allergies;
 	
-	private UUID parentId;
+	private int parentId;
 	
 	private List<String> familyPhysician;
 	
@@ -39,21 +41,6 @@ public class ReqUserProfileDTO {
 	
 	private String address;
 
-	public UUID getId() {
-		return id;
-	}
-
-	public void setId(UUID id) {
-		this.id = id;
-	}
-
-	public UUID getUserLoginId() {
-		return userLoginId;
-	}
-
-	public void setUserLoginId(UUID userLoginId) {
-		this.userLoginId = userLoginId;
-	}
 
 	public String getFname() {
 		return fname;
@@ -127,14 +114,6 @@ public class ReqUserProfileDTO {
 		this.allergies = allergies;
 	}
 
-	public UUID getParentId() {
-		return parentId;
-	}
-
-	public void setParentId(UUID parentId) {
-		this.parentId = parentId;
-	}
-
 	public List<String> getFamilyPhysician() {
 		return familyPhysician;
 	}
@@ -173,6 +152,30 @@ public class ReqUserProfileDTO {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getUserLoginId() {
+		return userLoginId;
+	}
+
+	public void setUserLoginId(int userLoginId) {
+		this.userLoginId = userLoginId;
+	}
+
+	public int getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
 	}
 	
 }

@@ -6,8 +6,8 @@
     <session-factory name="aredvi_session">
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="hibernate.connection.password">user444aredvi</property>
-        <!-- <property name="hibernate.connection.url">jdbc:mysql://arevidb.cy9qfls9xclg.us-west-2.rds.amazonaws.com:3306/aredvidb</property> -->
-        <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/aredvidb</property>
+        <property name="hibernate.connection.url">jdbc:mysql://arevidb.cy9qfls9xclg.us-west-2.rds.amazonaws.com:3306/aredvidb</property> 
+        <!-- <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/aredvidb</property> -->
         <property name="hibernate.connection.username">aredviuser</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.hbm2ddl.auto">create</property> 
@@ -23,5 +23,9 @@
         <mapping class="com.aredvi.sqlentity.Email" />
         <mapping class="com.aredvi.sqlentity.Speciality" />  
         <mapping class="com.aredvi.sqlentity.DocDocument" />
+        <mapping class="com.aredvi.sqlentity.Prescription" />
+        <mapping class="com.aredvi.sqlentity.Consultation" />
+        <mapping class="com.aredvi.sqlentity.PrescriptionLine" />
+        
     </session-factory>
 </hibernate-configuration>

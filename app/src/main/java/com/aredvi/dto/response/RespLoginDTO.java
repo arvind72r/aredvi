@@ -1,16 +1,15 @@
 package com.aredvi.dto.response;
 
-import java.util.UUID;
-
 public class RespLoginDTO {
-	private UUID userLoginId;
+	private int userLoginId;
 
-	public UUID getUserLoginId() {
+	public int getUserLoginId() {
 		return userLoginId;
 	}
 
-	public void setUserLoginId(UUID userLoginId) {
+	public void setUserLoginId(int userLoginId) {
 		this.userLoginId = userLoginId;
 	}
+
 	
 }

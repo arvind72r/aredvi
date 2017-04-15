@@ -4,7 +4,6 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -135,12 +134,6 @@ public class UserServiceImpl implements UserService {
 		roles.add(Roles.ROLE_USER.getRole());
 		userLogin.setPassword(getMD5(reqLoginDTO.getPassword()));
 		userLogin.setUserName(reqLoginDTO.getUserName());
-		// userLogin.setRoles(roles);
-		userLogin.setCreatedOn(new Date());
-		if (null != reqLoginDTO.getUserLoginId()) {
-			// userLogin.setId(reqLoginDTO.getUserLoginId());
-			userLogin.setUpdatedOn(new Date());
-		}
 	}
 
 

@@ -1,9 +1,7 @@
 package com.aredvi.dto.request;
 
-import java.util.UUID;
-
 public class ReqLoginDTO {
-	private UUID userLoginId;
+	private int userLoginId;
 	
 	private String userName;
 	
@@ -35,12 +33,12 @@ public class ReqLoginDTO {
 		this.confirmPassword = confirmPassword;
 	}
 
-	public UUID getUserLoginId() {
+	public int getUserLoginId() {
 		return userLoginId;
 	}
 
-	public void setUserLoginId(UUID userLoginId) {
+	public void setUserLoginId(int userLoginId) {
 		this.userLoginId = userLoginId;
 	}
-	
+
 }

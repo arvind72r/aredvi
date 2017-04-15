@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.aredvi.dto.request.RespPrescriptionDTO;
-import com.aredvi.dto.response.ReqPrescriptionDTO;
+import com.aredvi.dto.request.ReqPrescriptionDTO;
+import com.aredvi.dto.response.RespPrescriptionDTO;
 import com.aredvi.exceptions.AredviException;
 import com.aredvi.services.interfaces.PrescriptionService;
 import com.aredvi.utils.ResponseFormatter;

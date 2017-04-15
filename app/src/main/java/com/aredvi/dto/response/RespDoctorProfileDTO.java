@@ -1,121 +1,50 @@
 package com.aredvi.dto.response;
 
+import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.HashSet;
+import java.util.Set;
 
-public class RespDoctorProfileDTO {
-	private UUID id;
+import com.aredvi.dto.DocDocumentDTO;
+import com.aredvi.dto.PhoneDTO;
+import com.aredvi.dto.SpecialityDTO;
 
-	private UUID userId;
+public class RespDoctorProfileDTO implements Serializable{
 	
-	private UUID userLoginId;
+	private static final long serialVersionUID = 2336185895913938437L;
 
-	private String fname;
-
-	private String lname;
-
-	private String mobileNumber;
-
-	private String email;
-
-	private Date dob;
-
-	private String gender;
-
+	private int docID;
+	
+	private int userID;
+	
 	private String mpLicAuthority;
-
+	
 	private String mpLicNo;
-
+	
 	private Date mpLicDateOfIssue;
-
+	
 	private boolean varified;
-
-	private List<String> specialities;
-
+	
 	private String profile;
-
+	
 	private String calendar;
-
+	
 	private String photo;
-
-	private Map<String, String> documents;
 	
 	private boolean profileDelted;
+
+	private Set<DocDocumentDTO> docDocument = new HashSet<DocDocumentDTO>(0);
 	
-	private List<String> phoneNumber;
+	private Set<SpecialityDTO> speciality = new HashSet<SpecialityDTO>(0);
 	
-	private String lat;
+	private Set<PhoneDTO> phone = new HashSet<PhoneDTO>(0);
 	
-	private String longs;
-	
-	private String city;
-	
-	private String address;
-
-	public UUID getId() {
-		return id;
+	public int getDocID() {
+		return docID;
 	}
 
-	public void setId(UUID id) {
-		this.id = id;
-	}
-
-	public UUID getUserId() {
-		return userId;
-	}
-
-	public void setUserId(UUID userId) {
-		this.userId = userId;
-	}
-
-	public String getFname() {
-		return fname;
-	}
-
-	public void setFname(String fname) {
-		this.fname = fname;
-	}
-
-	public String getLname() {
-		return lname;
-	}
-
-	public void setLname(String lname) {
-		this.lname = lname;
-	}
-
-	public String getMobileNumber() {
-		return mobileNumber;
-	}
-
-	public void setMobileNumber(String mobileNumber) {
-		this.mobileNumber = mobileNumber;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Date getDob() {
-		return dob;
-	}
-
-	public void setDob(Date dob) {
-		this.dob = dob;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
+	public void setDocID(int docID) {
+		this.docID = docID;
 	}
 
 	public String getMpLicAuthority() {
@@ -150,14 +79,6 @@ public class RespDoctorProfileDTO {
 		this.varified = varified;
 	}
 
-	public List<String> getSpecialities() {
-		return specialities;
-	}
-
-	public void setSpecialities(List<String> specialities) {
-		this.specialities = specialities;
-	}
-
 	public String getProfile() {
 		return profile;
 	}
@@ -182,14 +103,6 @@ public class RespDoctorProfileDTO {
 		this.photo = photo;
 	}
 
-	public Map<String, String> getDocuments() {
-		return documents;
-	}
-
-	public void setDocuments(Map<String, String> documents) {
-		this.documents = documents;
-	}
-
 	public boolean isProfileDelted() {
 		return profileDelted;
 	}
@@ -198,52 +111,36 @@ public class RespDoctorProfileDTO {
 		this.profileDelted = profileDelted;
 	}
 
-	public List<String> getPhoneNumber() {
-		return phoneNumber;
+	public Set<DocDocumentDTO> getDocDocument() {
+		return docDocument;
 	}
 
-	public void setPhoneNumber(List<String> phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setDocDocument(Set<DocDocumentDTO> docDocument) {
+		this.docDocument = docDocument;
 	}
 
-	public UUID getUserLoginId() {
-		return userLoginId;
+	public Set<SpecialityDTO> getSpeciality() {
+		return speciality;
 	}
 
-	public void setUserLoginId(UUID userLoginId) {
-		this.userLoginId = userLoginId;
+	public void setSpeciality(Set<SpecialityDTO> speciality) {
+		this.speciality = speciality;
 	}
 
-	public String getLat() {
-		return lat;
+	public int getUserID() {
+		return userID;
 	}
 
-	public void setLat(String lat) {
-		this.lat = lat;
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 
-	public String getLongs() {
-		return longs;
+	public Set<PhoneDTO> getPhone() {
+		return phone;
 	}
 
-	public void setLongs(String longs) {
-		this.longs = longs;
+	public void setPhone(Set<PhoneDTO> phone) {
+		this.phone = phone;
 	}
 
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	
 }

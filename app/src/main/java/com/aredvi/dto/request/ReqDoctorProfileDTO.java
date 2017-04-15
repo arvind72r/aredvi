@@ -1,10 +1,17 @@
 package com.aredvi.dto.request;
 
+import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
-public class ReqDoctorProfileDTO {
+import com.aredvi.dto.DocDocumentDTO;
+import com.aredvi.dto.PhoneDTO;
+import com.aredvi.dto.SpecialityDTO;
+
+public class ReqDoctorProfileDTO implements Serializable{
+	private static final long serialVersionUID = -8601436166837992795L;
+
 	private int id;
 	
 	private int userId;
@@ -31,17 +38,17 @@ public class ReqDoctorProfileDTO {
 	
 	private boolean varified;
 	
-	private List<String> specialities;
-	
 	private String profile;
 	
 	private String calendar;
 	
 	private String photo;
 	
-	private Map<String, String> documents;
+	private Set<DocDocumentDTO> docDocument = new HashSet<DocDocumentDTO>(0);
 	
-	private List<String> phoneNumber;
+	private Set<SpecialityDTO> speciality = new HashSet<SpecialityDTO>(0);	
+	
+	private Set<PhoneDTO> phone = new HashSet<PhoneDTO>(0);
 	
 	private boolean profileDelted;
 	
@@ -129,12 +136,20 @@ public class ReqDoctorProfileDTO {
 		this.varified = varified;
 	}
 
-	public List<String> getSpecialities() {
-		return specialities;
+	public Set<DocDocumentDTO> getDocDocument() {
+		return docDocument;
 	}
 
-	public void setSpecialities(List<String> specialities) {
-		this.specialities = specialities;
+	public void setDocDocument(Set<DocDocumentDTO> docDocument) {
+		this.docDocument = docDocument;
+	}
+
+	public Set<SpecialityDTO> getSpeciality() {
+		return speciality;
+	}
+
+	public void setSpeciality(Set<SpecialityDTO> speciality) {
+		this.speciality = speciality;
 	}
 
 	public String getProfile() {
@@ -151,14 +166,6 @@ public class ReqDoctorProfileDTO {
 
 	public void setPhoto(String photo) {
 		this.photo = photo;
-	}
-
-	public Map<String, String> getDocuments() {
-		return documents;
-	}
-
-	public void setDocuments(Map<String, String> documents) {
-		this.documents = documents;
 	}
 
 	public Date getDob() {
@@ -183,14 +190,6 @@ public class ReqDoctorProfileDTO {
 
 	public void setCalendar(String calendar) {
 		this.calendar = calendar;
-	}
-
-	public List<String> getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(List<String> phoneNumber) {
-		this.phoneNumber = phoneNumber;
 	}
 
 	public String getLat() {
@@ -263,6 +262,14 @@ public class ReqDoctorProfileDTO {
 
 	public void setUserLoginId(int userLoginId) {
 		this.userLoginId = userLoginId;
+	}
+
+	public Set<PhoneDTO> getPhone() {
+		return phone;
+	}
+
+	public void setPhone(Set<PhoneDTO> phone) {
+		this.phone = phone;
 	}
 	
 }

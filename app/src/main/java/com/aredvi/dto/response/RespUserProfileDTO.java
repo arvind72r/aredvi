@@ -1,13 +1,21 @@
 package com.aredvi.dto.response;
 
+import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.HashSet;
+import java.util.Set;
 
-public class RespUserProfileDTO {
-	private UUID id;
+import com.aredvi.dto.AddressDTO;
+import com.aredvi.dto.AllergyDTO;
+import com.aredvi.dto.EmailDTO;
+import com.aredvi.dto.PhoneDTO;
+
+
+public class RespUserProfileDTO implements Serializable{
 	
-	private UUID userLoginId;
+	private static final long serialVersionUID = -1069255568979037352L;
+
+	private int userId;
 	
 	private String fname;
 	
@@ -15,38 +23,37 @@ public class RespUserProfileDTO {
 	
 	private Date dob;
 	
-	private String city;
-	
 	private String mobileNumber;
 	
 	private String email;
 	
+	private String address;
+	
+	private String city;
+	
 	private String gender;
 	
-	private String type;
+	private String type; // reception, User, Doctor
 	
-	private List<String> allergies;
+	private String photo;
 	
-	private UUID parentId;
+	private Set<PhoneDTO> phone = new HashSet<PhoneDTO>(0);
 	
-	private List<String> familyPhysician;
+	private Set<AddressDTO> addresses = new HashSet<AddressDTO>(0);
 	
-	private String address;
+	private Set<AllergyDTO> allergy = new HashSet<AllergyDTO>(0);
+	
+	private Set<EmailDTO> emails = new HashSet<EmailDTO>(0);
+	
+	private int doctorxid ;
+	
 
-	public UUID getId() {
-		return id;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setId(UUID id) {
-		this.id = id;
-	}
-
-	public UUID getUserLoginId() {
-		return userLoginId;
-	}
-
-	public void setUserLoginId(UUID userLoginId) {
-		this.userLoginId = userLoginId;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public String getFname() {
@@ -65,6 +72,14 @@ public class RespUserProfileDTO {
 		this.lname = lname;
 	}
 
+	public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+
 	public String getMobileNumber() {
 		return mobileNumber;
 	}
@@ -79,6 +94,22 @@ public class RespUserProfileDTO {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 	public String getGender() {
@@ -97,52 +128,54 @@ public class RespUserProfileDTO {
 		this.type = type;
 	}
 
-	public List<String> getAllergies() {
-		return allergies;
+	public String getPhoto() {
+		return photo;
 	}
 
-	public void setAllergies(List<String> allergies) {
-		this.allergies = allergies;
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 
-	public UUID getParentId() {
-		return parentId;
+	public Set<PhoneDTO> getPhone() {
+		return phone;
 	}
 
-	public void setParentId(UUID parentId) {
-		this.parentId = parentId;
+	public void setPhone(Set<PhoneDTO> phone) {
+		this.phone = phone;
 	}
 
-	public List<String> getFamilyPhysician() {
-		return familyPhysician;
+	public Set<AddressDTO> getAddresses() {
+		return addresses;
 	}
 
-	public void setFamilyPhysician(List<String> familyPhysician) {
-		this.familyPhysician = familyPhysician;
+	public void setAddresses(Set<AddressDTO> addresses) {
+		this.addresses = addresses;
 	}
 
-	public Date getDob() {
-		return dob;
+	public Set<AllergyDTO> getAllergy() {
+		return allergy;
 	}
 
-	public void setDob(Date dob) {
-		this.dob = dob;
+	public void setAllergy(Set<AllergyDTO> allergy) {
+		this.allergy = allergy;
 	}
 
-	public String getCity() {
-		return city;
+	public Set<EmailDTO> getEmails() {
+		return emails;
 	}
 
-	public void setCity(String city) {
-		this.city = city;
+	public void setEmails(Set<EmailDTO> emails) {
+		this.emails = emails;
 	}
 
-	public String getAddress() {
-		return address;
+	public int getDoctorxid() {
+		return doctorxid;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setDoctorxid(int doctorxid) {
+		this.doctorxid = doctorxid;
 	}
+
 	
 }
+

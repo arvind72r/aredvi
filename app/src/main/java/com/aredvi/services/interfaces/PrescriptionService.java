@@ -1,7 +1,7 @@
 package com.aredvi.services.interfaces;
 
-import com.aredvi.dto.request.RespPrescriptionDTO;
-import com.aredvi.dto.response.ReqPrescriptionDTO;
+import com.aredvi.dto.request.ReqPrescriptionDTO;
+import com.aredvi.dto.response.RespPrescriptionDTO;
 import com.aredvi.exceptions.AredviException;
 
 public interface PrescriptionService {
