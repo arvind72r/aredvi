@@ -29,7 +29,7 @@ public class PrescriptionLine implements Serializable {
 	private Date createdOn;
 	private Date updatedOn;
 	private Boolean deleted = Boolean.FALSE;
-	private Prescription prescription;
+	private Prescription prescription = new Prescription();
 	private int refill;
 
 	@Id

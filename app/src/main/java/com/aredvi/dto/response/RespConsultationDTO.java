@@ -116,124 +116,125 @@ public class RespConsultationDTO implements Serializable {
 		this.createdBy = createdBy;
 	}
 
+	public class Address{
+		private String address;
+		private String pinCode;
+		public String getAddress() {
+			return address;
+		}
+		public void setAddress(String address) {
+			this.address = address;
+		}
+		public String getPinCode() {
+			return pinCode;
+		}
+		public void setPinCode(String pinCode) {
+			this.pinCode = pinCode;
+		}
+		
+	}
+
+	public class Doctor{
+		private int docID;
+		private String docName;
+		
+		public int getDocID() {
+			return docID;
+		}
+		public void setDocID(int docID) {
+			this.docID = docID;
+		}
+		public String getDocName() {
+			return docName;
+		}
+		public void setDocName(String docName) {
+			this.docName = docName;
+		}
+		
+	}
+
+	public class User{
+		private int userId;
+		
+		private String fname;
+		
+		private String lname;
+		
+		private Date dob;
+		
+		private String mobileNumber;
+		
+		private String email;
+		
+		private String address;
+		
+		private String city;
+
+		public int getUserId() {
+			return userId;
+		}
+
+		public void setUserId(int userId) {
+			this.userId = userId;
+		}
+
+		public String getFname() {
+			return fname;
+		}
+
+		public void setFname(String fname) {
+			this.fname = fname;
+		}
+
+		public String getLname() {
+			return lname;
+		}
+
+		public void setLname(String lname) {
+			this.lname = lname;
+		}
+
+		public Date getDob() {
+			return dob;
+		}
+
+		public void setDob(Date dob) {
+			this.dob = dob;
+		}
+
+		public String getMobileNumber() {
+			return mobileNumber;
+		}
+
+		public void setMobileNumber(String mobileNumber) {
+			this.mobileNumber = mobileNumber;
+		}
+
+		public String getEmail() {
+			return email;
+		}
+
+		public void setEmail(String email) {
+			this.email = email;
+		}
+
+		public String getAddress() {
+			return address;
+		}
+
+		public void setAddress(String address) {
+			this.address = address;
+		}
+
+		public String getCity() {
+			return city;
+		}
+
+		public void setCity(String city) {
+			this.city = city;
+		}
+		
+		
+	}
 }
 
-class Address{
-	private String address;
-	private String pinCode;
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public String getPinCode() {
-		return pinCode;
-	}
-	public void setPinCode(String pinCode) {
-		this.pinCode = pinCode;
-	}
-	
-}
-
-class Doctor{
-	private int docID;
-	private int docName;
-	public int getDocID() {
-		return docID;
-	}
-	public void setDocID(int docID) {
-		this.docID = docID;
-	}
-	public int getDocName() {
-		return docName;
-	}
-	public void setDocName(int docName) {
-		this.docName = docName;
-	}
-	
-}
-
-class User{
-	private int userId;
-	
-	private String fname;
-	
-	private String lname;
-	
-	private Date dob;
-	
-	private String mobileNumber;
-	
-	private String email;
-	
-	private String address;
-	
-	private String city;
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
-	public String getFname() {
-		return fname;
-	}
-
-	public void setFname(String fname) {
-		this.fname = fname;
-	}
-
-	public String getLname() {
-		return lname;
-	}
-
-	public void setLname(String lname) {
-		this.lname = lname;
-	}
-
-	public Date getDob() {
-		return dob;
-	}
-
-	public void setDob(Date dob) {
-		this.dob = dob;
-	}
-
-	public String getMobileNumber() {
-		return mobileNumber;
-	}
-
-	public void setMobileNumber(String mobileNumber) {
-		this.mobileNumber = mobileNumber;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-	
-	
-}

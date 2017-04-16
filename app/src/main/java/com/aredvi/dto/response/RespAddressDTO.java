@@ -12,8 +12,8 @@ public class RespAddressDTO implements Serializable {
 	private String address;
 	private String lat;
 	private String lng;
-	private User user;
 	private String pinCode;
+	private int userID;
 	
 	public int getAddId() {
 		return addId;
@@ -49,13 +49,11 @@ public class RespAddressDTO implements Serializable {
 	public void setLng(String lng) {
 		this.lng = lng;
 	}
-	
-	public User getUser() {
-		return user;
+	public int getUserID() {
+		return userID;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
-	
 	
 }

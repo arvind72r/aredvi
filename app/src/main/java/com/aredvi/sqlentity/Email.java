@@ -23,7 +23,7 @@ public class Email implements Serializable{
 	private String id;
 	private String emilID;
 	private String type;
-	private User user;
+	private User user = new User();
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

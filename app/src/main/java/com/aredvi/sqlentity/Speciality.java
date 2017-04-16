@@ -22,7 +22,7 @@ public class Speciality implements Serializable{
 	private static final long serialVersionUID = 3364946166646964476L;
 	private int specId;
 	private String special;
-	private Doctor doctor;
+	private Doctor doctor = new Doctor();
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

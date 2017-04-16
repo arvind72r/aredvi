@@ -42,7 +42,7 @@ public class UserLogin implements Serializable{
 	
 	private String authProvider;
 	
-	private User user;
+	private User user = new User();
 	
 	private Set<UserRole> userRole = new HashSet<UserRole>(0);
 

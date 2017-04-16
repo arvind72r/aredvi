@@ -7,7 +7,7 @@ public class RespAllergyDTO implements Serializable {
 	private int id;
 	private String allergyType;
 	private boolean isPresent;
-	private User user;
+	private int userID;
 
 	public int getId() {
 		return id;
@@ -33,12 +33,12 @@ public class RespAllergyDTO implements Serializable {
 		this.isPresent = isPresent;
 	}
 
-	public User getUser() {
-		return user;
+	public int getUserID() {
+		return userID;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 
 }

@@ -27,7 +27,7 @@ public class Address implements Serializable {
 	private String address;
 	private String lat;
 	private String lng;
-	private User user;
+	private User user = new User();
 	private String pinCode;
 	private Set<Consultation> consultation = new HashSet<Consultation>(0);
 	

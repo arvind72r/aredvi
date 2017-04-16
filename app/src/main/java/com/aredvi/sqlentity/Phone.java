@@ -24,7 +24,7 @@ public class Phone implements Serializable {
 	 */
 	private int phoneId;
 	private String phoneNumber;
-	private User user;
+	private User user = new User();
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

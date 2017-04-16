@@ -47,7 +47,7 @@ public class User implements Serializable{
 	
 	private String type; // reception, User, Doctor
 	
-	private UserLogin userLogin;
+	private UserLogin userLogin = new UserLogin();
 	
 	private String photo;
 	

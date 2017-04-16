@@ -27,15 +27,15 @@ public class Consultation implements Serializable {
 	private String diagnosis;
 	private String userNotes;
 	private Boolean active = Boolean.TRUE;
-	private Prescription prescription;
+	private Prescription prescription = new Prescription();
 	private Date consultationDate;
 	private Date createdOn;
 	private Date updatedOn;
-	private User createdBy; // User , Front desk
+	private User createdBy = new User();; // User , Front desk
 
-	private Address practisLocation;
-	private Doctor doctor;
-	private User user;
+	private Address practisLocation = new Address();
+	private Doctor doctor = new Doctor();
+	private User user = new User();
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

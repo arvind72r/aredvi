@@ -31,7 +31,7 @@ public class ConsultationController {
 		return resp;
 	}
 	
-	@RequestMapping(value = "/addconsultation", method = RequestMethod.PUT, headers = "Accept=application/json")
+	@RequestMapping(value = "/updateconsultation", method = RequestMethod.PUT, headers = "Accept=application/json")
 	public ResponseFormatter<RespConsultationDTO> updateConsultation(@RequestBody ReqConsultationDTO request) throws AredviException{
 		RespConsultationDTO respConsultationDTO = consultationService.updateConsultation(request);
 		ResponseFormatter<RespConsultationDTO> resp = new ResponseFormatter<RespConsultationDTO>();

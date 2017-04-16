@@ -40,7 +40,9 @@ public class ReqUserProfileDTO implements Serializable{
 	
 	private String confirmPassword;
 	
-	private Set<PhoneDTO> phone = new HashSet<PhoneDTO>(0);
+	private String photo;
+	
+	private Set<PhoneDTO> phone = new HashSet<PhoneDTO>(0); 
 	
 	private Set<AddressDTO> addresses = new HashSet<AddressDTO>(0);
 	
@@ -183,6 +185,14 @@ public class ReqUserProfileDTO implements Serializable{
 
 	public void setEmails(Set<EmailDTO> emails) {
 		this.emails = emails;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 	
 }

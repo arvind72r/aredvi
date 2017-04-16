@@ -50,7 +50,7 @@ public class Doctor implements Serializable{
 	
 	private Set<Consultation> consultation = new HashSet<Consultation>(0);
 	
-	private User user;
+	private User user = new User();
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
