@@ -82,7 +82,7 @@ public class Address implements Serializable {
 		this.user = user;
 	}
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "consultation")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "practisLocation")
 	public Set<Consultation> getConsultation() {
 		return consultation;
 	}

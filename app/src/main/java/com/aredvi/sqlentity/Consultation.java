@@ -84,7 +84,7 @@ public class Consultation implements Serializable {
 		this.active = active;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "prescription")
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "consultation")
 	public Prescription getPrescription() {
 		return prescription;
 	}
@@ -115,7 +115,7 @@ public class Consultation implements Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "aredvi_user_xid")
+	@JoinColumn(name = "user_xid")
 	public User getUser() {
 		return user;
 	}
@@ -151,7 +151,7 @@ public class Consultation implements Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "aredvi_user_xid")
+	@JoinColumn(name = "created_user_xid")
 	public User getCreatedBy() {
 		return createdBy;
 	}
