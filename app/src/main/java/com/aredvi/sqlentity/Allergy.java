@@ -22,7 +22,7 @@ public class Allergy implements Serializable {
 	private int id;
 	private String allergyType;
 	private boolean isPresent;
-	private User user = new User();
+	private User user;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

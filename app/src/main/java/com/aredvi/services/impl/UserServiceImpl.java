@@ -4,11 +4,13 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.aredvi.dao.interfaces.UserDAO;
 import com.aredvi.dao.interfaces.UserLoginDAO;
@@ -41,15 +43,31 @@ public class UserServiceImpl implements UserService {
 	UserLoginDAO userLoginDAO;
 
 	@Override
+	@Transactional
 	public RespUserProfileDTO addUserProfile(ReqUserProfileDTO requestData) throws AredviException {
 		RespUserProfileDTO respUserProfileDTO = new RespUserProfileDTO();
 		User user = convertRequestToEntity(requestData);
-		user = userDAO.addUserProfile(user);
+		createLogin(user,requestData);
+		//user = userDAO.addUserProfile(user);
+		swapData(respUserProfileDTO, user);
+		return respUserProfileDTO;
+	}
+
+	private RespUserProfileDTO createLogin(User user, ReqUserProfileDTO requestData) throws AredviException {
+		UserLogin userLogin = new UserLogin();
+		RespUserProfileDTO respUserProfileDTO = new RespUserProfileDTO();
+		ReqLoginDTO reqLogin = new ReqLoginDTO();
+		reqLogin.setUserName(requestData.getUserName());
+		reqLogin.setPassword(requestData.getPassword());
+		convertRequestToEntity(userLogin, reqLogin);
+		userLogin.setUser(user);
+		userLogin = createLogin(userLogin);
 		swapData(respUserProfileDTO, user);
 		return respUserProfileDTO;
 	}
 
 	@Override
+	@Transactional
 	public RespUserProfileDTO updateUserProfile(ReqUserProfileDTO requestData) throws AredviException {
 		RespUserProfileDTO respUserProfileDTO = new RespUserProfileDTO();
 		User user = convertRequestToEntity(requestData);
@@ -59,6 +77,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional
 	public RespUserProfileDTO getUserProfile(int usrId) throws AredviException {
 		RespUserProfileDTO respUserProfileDTO = new RespUserProfileDTO();
 		User user = userDAO.getUserProfile(usrId);
@@ -67,6 +86,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional
 	public List<RespUserProfileDTO> searchUserByName(String name) throws AredviException {
 		List<RespUserProfileDTO> respUserProfileDTOs = new ArrayList<RespUserProfileDTO>();
 		List<User> users = userDAO.searchUserByName(name);
@@ -77,6 +97,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional
 	public List<RespUserProfileDTO> searchUserByType(String type) throws AredviException {
 		List<RespUserProfileDTO> respUserProfileDTOs = new ArrayList<RespUserProfileDTO>();
 		List<User> users = userDAO.searchUserByType(type);
@@ -100,8 +121,10 @@ public class UserServiceImpl implements UserService {
 
 	public void swapData(User user, ReqUserProfileDTO requestData) {
 		if (null != requestData) {
+			UserLogin userLogin = new UserLogin();
+			user.setUserLogin(userLogin);
 			user.setCity(requestData.getCity());
-			user.setDob(requestData.getDob());
+			user.setDob(new Date(requestData.getDob()));
 			user.setFname(requestData.getFname());
 			user.setGender(requestData.getGender());
 			user.setLname(requestData.getLname());
@@ -110,6 +133,7 @@ public class UserServiceImpl implements UserService {
 			for(PhoneDTO phoneDTO : requestData.getPhone()){
 				Phone phone = new Phone();
 				phone.setPhoneNumber(phoneDTO.getPhoneNumber());
+				phone.setUser(user);
 				user.getPhone().add(phone);
 			}
 			for(AddressDTO addressDTO : requestData.getAddresses()){
@@ -118,18 +142,21 @@ public class UserServiceImpl implements UserService {
 				address.setLat(addressDTO.getLat());
 				address.setLng(addressDTO.getLng());
 				address.setPinCode(addressDTO.getPinCode());
+				address.setUser(user);
 				user.getAddresses().add(address);
 			}
 			for(AllergyDTO allergyDTO : requestData.getAllergy()){
 				Allergy allergy = new Allergy();
 				allergy.setAllergyType(allergyDTO.getAllergyType());
 				allergy.setPresent(allergyDTO.isPresent());
+				allergy.setUser(user);
 				user.getAllergy().add(allergy);
 			}
 			for(EmailDTO emailDTO : requestData.getEmails()){
 				Email email = new Email();
 				email.setEmilID(emailDTO.getEmilID());
 				email.setType(emailDTO.getType());
+				email.setUser(user);
 				user.getEmails().add(email);
 			}
 		}
@@ -176,6 +203,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional
 	public RespLoginDTO createLogin(ReqLoginDTO reqLoginDTO) throws AredviException {
 		UserLogin userLogin = new UserLogin();
 		RespLoginDTO respLoginDTO = new RespLoginDTO();
@@ -213,16 +241,24 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional
 	public UserLogin createLogin(UserLogin usrLogin) throws AredviException {
-		return userLoginDAO.createLogin(usrLogin);
+		User user = usrLogin.getUser();
+		UserLogin usrlgn = userLoginDAO.createLogin(usrLogin);
+		user.setUserLogin(usrlgn);
+		userDAO.addUserProfile(user);
+		usrlgn.setUser(user);
+		return usrlgn;
 	}
 
 	@Override
+	@Transactional
 	public UserLogin findByUserName(String userName) throws AredviException {
 		return userLoginDAO.findByUserName(userName);
 	}
 
 	@Override
+	@Transactional
 	public UserLogin findByAuthId(String authid) throws AredviException {
 		return userLoginDAO.findByAuthId(authid);
 	}

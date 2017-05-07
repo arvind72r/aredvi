@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -47,9 +49,10 @@ public class User implements Serializable{
 	
 	private String type; // reception, User, Doctor
 	
-	private UserLogin userLogin = new UserLogin();
-	
 	private String photo;
+	
+	private UserLogin userLogin;
+	
 	
 	private Set<Phone> phone = new HashSet<Phone>(0);
 	
@@ -59,7 +62,7 @@ public class User implements Serializable{
 	
 	private Set<Email> emails = new HashSet<Email>(0);
 	
-	private Doctor doctor = new Doctor();
+	private Doctor doctor;
 	
 
 	@Id
@@ -154,8 +157,17 @@ public class User implements Serializable{
 	public void setType(String type) {
 		this.type = type;
 	}
+	
+	@Column(name = "photo")
+	public String getPhoto() {
+		return photo;
+	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+	
+	@OneToMany(fetch = FetchType.EAGER,cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.MERGE }, mappedBy = "user")
 	public Set<Phone> getPhone() {
 		return phone;
 	}
@@ -164,7 +176,7 @@ public class User implements Serializable{
 		this.phone = phone;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToMany(fetch = FetchType.EAGER,cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.MERGE }, mappedBy = "user")
 	public Set<Address> getAddresses() {
 		return addresses;
 	}
@@ -173,7 +185,7 @@ public class User implements Serializable{
 		this.addresses = addresses;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.MERGE }, mappedBy = "user")
 	public Set<Allergy> getAllergy() {
 		return allergy;
 	}
@@ -182,7 +194,7 @@ public class User implements Serializable{
 		this.allergy = allergy;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.MERGE }, mappedBy = "user")
 	public Set<Email> getEmails() {
 		return emails;
 	}
@@ -191,7 +203,7 @@ public class User implements Serializable{
 		this.emails = emails;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToOne(fetch = FetchType.EAGER,cascade = { CascadeType.ALL,CascadeType.PERSIST,CascadeType.MERGE },  mappedBy = "user")
 	public Doctor getDoctor() {
 		return doctor;
 	}
@@ -210,14 +222,7 @@ public class User implements Serializable{
 		this.userLogin = userLogin;
 	}
 
-	@Column(name = "photo")
-	public String getPhoto() {
-		return photo;
-	}
 
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
 	
 	
 }

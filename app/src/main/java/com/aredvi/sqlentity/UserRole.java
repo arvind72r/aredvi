@@ -28,7 +28,7 @@ public class UserRole implements Serializable{
 	
 	private String role;
 	
-	UserLogin userLogin = new UserLogin();
+	UserLogin userLogin;
 	
 	private Set<Authority> authority = new HashSet<Authority>(0);
 	

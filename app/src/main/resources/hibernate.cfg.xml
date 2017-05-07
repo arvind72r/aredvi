@@ -10,7 +10,7 @@
         <!-- <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/aredvidb</property> -->
         <property name="hibernate.connection.username">aredviuser</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-        <property name="hibernate.hbm2ddl.auto">create</property> 
+        <!-- <property name="hibernate.hbm2ddl.auto">create</property>  -->
         
         <mapping class="com.aredvi.sqlentity.User" />
         <mapping class="com.aredvi.sqlentity.UserLogin" />  

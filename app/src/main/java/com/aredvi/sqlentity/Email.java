@@ -20,19 +20,19 @@ public class Email implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 283165060965171546L;
-	private String id;
+	private int emID;
 	private String emilID;
 	private String type;
-	private User user = new User();
+	private User user;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", unique = true, nullable = false)
-	public String getId() {
-		return id;
+	@Column(name = "emID", unique = true, nullable = false)
+	public int getEmID() {
+		return emID;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setEmID(int emID) {
+		this.emID = emID;
 	}
 	
 	@Column(name = "emilID")

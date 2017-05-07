@@ -1,7 +1,6 @@
 package com.aredvi.dto.request;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -10,47 +9,83 @@ import com.aredvi.dto.AddressDTO;
 import com.aredvi.dto.AllergyDTO;
 import com.aredvi.dto.EmailDTO;
 import com.aredvi.dto.PhoneDTO;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ReqUserProfileDTO implements Serializable{
-	private static final long serialVersionUID = 5395706710399504250L;
+	 static final long serialVersionUID = 5395706710399504250L;
 
-	private int id;
+	 int id;
 	
-	private int userLoginId;
+	 int userLoginId;
 	
-	private String fname;
+	 String fname;
 	
-	private String lname;
+	 String lname;
 	
-	private Date dob;
+	 String dob;
 	
-	private String gender;
+	 String gender;
 	
-	private String city;
+	 String city;
 	
-	private String type;
+	 String type;
 	
-	private int parentId;
+	 int parentId;
 	
-	private List<String> familyPhysician;
+	 List<String> familyPhysician;
 	
-	private String userName;
+	 String userName;
 	
-	private String password;
+	 String password;
 	
-	private String confirmPassword;
+	 String confirmPassword;
 	
-	private String photo;
+	 String photo;
 	
-	private Set<PhoneDTO> phone = new HashSet<PhoneDTO>(0); 
+	 @JsonProperty("phone")
+	 Set<PhoneDTO> phone; 
 	
-	private Set<AddressDTO> addresses = new HashSet<AddressDTO>(0);
+	 @JsonProperty("addresses")
+	 Set<AddressDTO> addresses;
 	
-	private Set<AllergyDTO> allergy = new HashSet<AllergyDTO>(0);
+	 @JsonProperty("allergy")
+	 Set<AllergyDTO> allergy;
 	
-	private Set<EmailDTO> emails = new HashSet<EmailDTO>(0);
+	 @JsonProperty("emails")
+	 Set<EmailDTO> emails;
+	 
+	
 
 
+	public ReqUserProfileDTO(int id, int userLoginId, String fname, String lname, String dob, String gender, String city,
+			String type, int parentId, List<String> familyPhysician, String userName, String password,
+			String confirmPassword, String photo, Set<PhoneDTO> phone, Set<AddressDTO> addresses,
+			Set<AllergyDTO> allergy, Set<EmailDTO> emails) {
+		super();
+		this.id = id;
+		this.userLoginId = userLoginId;
+		this.fname = fname;
+		this.lname = lname;
+		this.dob = dob;
+		this.gender = gender;
+		this.city = city;
+		this.type = type;
+		this.parentId = parentId;
+		this.familyPhysician = familyPhysician;
+		this.userName = userName;
+		this.password = password;
+		this.confirmPassword = confirmPassword;
+		this.photo = photo;
+		this.phone = new HashSet<PhoneDTO>();
+		this.addresses = new HashSet<AddressDTO>();
+		this.allergy = new HashSet<AllergyDTO>();
+		this.emails = new HashSet<EmailDTO>();
+	}
+
+	public ReqUserProfileDTO(){
+		
+	}
+	
 	public String getFname() {
 		return fname;
 	}
@@ -67,11 +102,11 @@ public class ReqUserProfileDTO implements Serializable{
 		this.lname = lname;
 	}
 
-	public Date getDob() {
+	public String getDob() {
 		return dob;
 	}
 
-	public void setDob(Date dob) {
+	public void setDob(String dob) {
 		this.dob = dob;
 	}
 

@@ -50,7 +50,7 @@ public class Doctor implements Serializable{
 	
 	private Set<Consultation> consultation = new HashSet<Consultation>(0);
 	
-	private User user = new User();
+	private User user;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -136,7 +136,7 @@ public class Doctor implements Serializable{
 		this.profileDelted = profileDelted;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "doctor")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "doctor")
 	public Set<DocDocument> getDocDocument() {
 		return docDocument;
 	}
@@ -145,7 +145,7 @@ public class Doctor implements Serializable{
 		this.docDocument = docDocument;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "doctor")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "doctor")
 	public Set<Speciality> getSpeciality() {
 		return speciality;
 	}
@@ -154,7 +154,7 @@ public class Doctor implements Serializable{
 		this.speciality = speciality;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "aredvi_user_xid")
 	public User getUser() {
 		return user;
@@ -164,7 +164,7 @@ public class Doctor implements Serializable{
 		this.user = user;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "doctor")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "doctor")
 	public Set<Consultation> getConsultation() {
 		return consultation;
 	}

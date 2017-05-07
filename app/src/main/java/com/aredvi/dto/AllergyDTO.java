@@ -3,11 +3,11 @@ package com.aredvi.dto;
 import java.io.Serializable;
 
 public class AllergyDTO implements Serializable {
-	private static final long serialVersionUID = -3796807256919106296L;
-	private int id;
-	private String allergyType;
-	private boolean isPresent;
-	private int userxid;
+	 static final long serialVersionUID = -3796807256919106296L;
+	 int id;
+	 String allergyType;
+	 boolean isPresent;
+	 int userxid;
 
 	public int getId() {
 		return id;
@@ -41,4 +41,15 @@ public class AllergyDTO implements Serializable {
 		this.userxid = userxid;
 	}
 
+	public AllergyDTO(int id, String allergyType, boolean isPresent, int userxid) {
+		super();
+		this.id = id;
+		this.allergyType = allergyType;
+		this.isPresent = isPresent;
+		this.userxid = userxid;
+	}
+
+	public AllergyDTO(){
+		
+	}
 }

@@ -31,21 +31,21 @@
 
 
 	<context:component-scan base-package="com.aredvi" /> 
+	<mvc:annotation-driven />  
 	<!-- <cassandra:repositories base-package="com.aredvi.repository" />
   	<cassandra:mapping entity-base-packages="com.aredvi.entity" /> -->
 	<context:annotation-config />
-	<mvc:annotation-driven />
 	<mvc:resources location="/WEB-INF/utils/" mapping="/utils/**" />
 	<task:executor id="asyncExecutor" pool-size="60" />
 	<task:annotation-driven executor="asyncExecutor" />
 
-	<bean id="viewResolver"
+	<!-- <bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"
 			value="org.springframework.web.servlet.view.JstlView" />
 		<property name="prefix" value="/WEB-INF/vtemplates/" />
 		<property name="suffix" value=".jsp" />
-	</bean>
+	</bean> -->
 
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
@@ -102,16 +102,27 @@
 		</property>
 	</bean>
 	
-	<!-- <bean id="dataSource"
+   <tx:annotation-driven proxy-target-class="true" />
+
+	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${mysql.driverClassName}" />
 		<property name="url" value="${mysql.databaseurl}" />
 		<property name="username" value="${mysql.username}" />
 		<property name="password" value="${mysql.password}" />
 	</bean>
-	<bean id="dataSource" class="com.mysql.jdbc.jdbc2.optional.MysqlDataSource" 
-		destroy-method="close" p:driverClassName="${jdbc.driverClassName}" p:url="${jdbc.databaseurl}" 
-		p:username="${jdbc.username}" p:password="${jdbc.password}" />
+	<bean id="jsonMessageConverter"
+    class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+
+	<bean
+   		 class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+    	<property name="messageConverters">
+        <list>
+            <ref bean="jsonMessageConverter" />
+        </list>
+    </property>
+</bean> 
+	
 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
@@ -122,47 +133,21 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">${mysql.dialect}</prop>
-				<prop key="hibernate.hbm2ddl.auto">create</prop> 
+				<!-- <prop key="hibernate.hbm2ddl.auto">create</prop>  -->
 				<prop key="hibernate.show_sql">true</prop>
 			</props>
 		</property>
-	</bean> -->
+	</bean>
 
-	<!-- <bean id="transactionManager"
+	<!-- <tx:annotation-driven proxy-target-class="true" /> -->
+
+	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
-	</bean> -->
-	
-	
-	 <bean id="entityManagerFactoryBean" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-      <property name="dataSource" ref="dataSource" />
-      <property name="packagesToScan" value="com.aredvi.sqlentity" />
-      <property name="jpaVendorAdapter">
-         <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
-      </property>
-      <property name="jpaProperties">
-         <props>
-            <prop key="hibernate.hbm2ddl.auto">validate</prop>
-            <prop key="hibernate.dialect">${mysql.dialect}</prop>
-         </props>
-      </property>
-   </bean>
-   <jpa:repositories base-package="com.aredvi.mysqlrepo" /> 
-   <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-      <property name="driverClassName" value="${mysql.driverClassName}" />
-      <property name="url" value="${mysql.databaseurl}" />
-      <property name="username" value="${mysql.username}" />
-      <property name="password" value="${mysql.password}" />
-   </bean>
-     
-    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-      <property name="entityManagerFactory" ref="entityManagerFactoryBean" />
-   </bean>
-   
-   <tx:annotation-driven proxy-target-class="true" />
+	</bean>
+		
 	
 	<solr:repositories base-package="com.aredvi.solr"  multicore-support="true"/>
-	
 	<solr:solr-server id="solrServer" url="${solr.server.url}" maxConnections="100000" timeout="1500"/>
 	<bean id="solrTemplate" class="org.springframework.data.solr.core.SolrTemplate">
 		<constructor-arg index="0" ref="solrServerFactory" />

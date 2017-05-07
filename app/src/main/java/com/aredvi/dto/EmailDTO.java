@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 public class EmailDTO implements Serializable{
 	
-	private static final long serialVersionUID = 945544144007900153L;
-	private int id;
-	private String emilID;
-	private String type;
-	private int userID;
+	 static final long serialVersionUID = 945544144007900153L;
+	 int id;
+	 String emilID;
+	 String type;
+	 int userID;
 	
 	
 	public String getEmilID() {
@@ -36,6 +36,15 @@ public class EmailDTO implements Serializable{
 	public void setUserID(int userID) {
 		this.userID = userID;
 	}
-	
+	public EmailDTO(int id, String emilID, String type, int userID) {
+		super();
+		this.id = id;
+		this.emilID = emilID;
+		this.type = type;
+		this.userID = userID;
+	}
+	public EmailDTO(){
+		
+	}
 	
 }

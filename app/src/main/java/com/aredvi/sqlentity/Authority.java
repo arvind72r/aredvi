@@ -20,7 +20,7 @@ public class Authority implements Serializable{
 
 	private int authId;
 
-	private UserRole userRole = new UserRole();	
+	private UserRole userRole;	
 	
 	private String auth;
 	

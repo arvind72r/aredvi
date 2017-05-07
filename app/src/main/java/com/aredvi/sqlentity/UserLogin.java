@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -42,7 +43,7 @@ public class UserLogin implements Serializable{
 	
 	private String authProvider;
 	
-	private User user = new User();
+	private User user =  new User();
 	
 	private Set<UserRole> userRole = new HashSet<UserRole>(0);
 
@@ -138,7 +139,7 @@ public class UserLogin implements Serializable{
 		this.user = user;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userLogin")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "userLogin")
 	public Set<UserRole> getUserRole() {
 		return userRole;
 	}

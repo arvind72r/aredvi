@@ -24,7 +24,7 @@ public class Prescription implements Serializable{
 	 */
 	private static final long serialVersionUID = -4077884311916482626L;
 	private int prescriptionId;
-	private Consultation consultation = new Consultation();
+	private Consultation consultation;
 	private Set<PrescriptionLine> drug = new HashSet<PrescriptionLine>(0);
 	private Date createdOn;
 	private Date updatedOn;

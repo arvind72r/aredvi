@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.aredvi.exceptions.AredviExceptionDetail;
 
-public class ResponseFormatter<T> {
+public class ResponseFormatter<T>{
 	private String sessionId;
 
 	private T responseData;
@@ -48,7 +48,6 @@ public class ResponseFormatter<T> {
 
 	public ResponseFormatter(String sessionId, T responseData, List<AredviExceptionDetail> errorMessages,
 			boolean hasException) {
-		super();
 		this.sessionId = sessionId;
 		this.responseData = responseData;
 		this.errorMessages = errorMessages;

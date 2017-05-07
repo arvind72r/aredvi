@@ -24,7 +24,7 @@ public class DocDocument implements Serializable{
 	private int docId;
 	private String docName;
 	private String docpath;
-	private Doctor doctor = new Doctor();
+	private Doctor doctor;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

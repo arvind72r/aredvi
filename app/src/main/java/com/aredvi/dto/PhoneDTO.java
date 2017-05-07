@@ -2,11 +2,12 @@ package com.aredvi.dto;
 
 import java.io.Serializable;
 
+
 public class PhoneDTO implements Serializable {
-	private static final long serialVersionUID = -7269735528517666688L;
-	private int phoneId;
-	private String phoneNumber;
-	private int userid;
+	 static final long serialVersionUID = -7269735528517666688L;
+	 int phoneId;
+	 String phoneNumber;
+	 int userid;
 
 	public int getPhoneId() {
 		return phoneId;
@@ -32,4 +33,14 @@ public class PhoneDTO implements Serializable {
 		this.userid = userid;
 	}
 
+	public PhoneDTO(int phoneId, String phoneNumber, int userid) {
+		super();
+		this.phoneId = phoneId;
+		this.phoneNumber = phoneNumber;
+		this.userid = userid;
+	}
+	public PhoneDTO(){
+		
+	}
+	
 }

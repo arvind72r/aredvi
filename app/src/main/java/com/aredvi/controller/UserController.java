@@ -4,12 +4,14 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.http.MediaType;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aredvi.dto.request.ReqLoginDTO;
@@ -30,8 +32,8 @@ public class UserController extends AredviController{
 	@Resource(name = "userService")
 	private UserService usrService;
 	
-	@RequestMapping(value = "/createLogin", method = RequestMethod.PUT, headers = "Accept=application/json")
-	public ResponseFormatter<RespLoginDTO> createLogin(@RequestBody ReqLoginDTO request) throws AredviException{
+	@RequestMapping(value = "/createLogin", method = RequestMethod.PUT, headers = "Accept=application/json", produces = MediaType.APPLICATION_JSON_VALUE )
+	public @ResponseBody ResponseFormatter<RespLoginDTO> createLogin(@RequestBody ReqLoginDTO request) throws AredviException{
 		if(null == request){
 			 throw new InvalidRequestException("Credentials are missing.");
 		}else if(!(request.getPassword()).equalsIgnoreCase(request.getConfirmPassword())){
@@ -48,7 +50,7 @@ public class UserController extends AredviController{
 	}
 	
 	@Secured("ROLE_USER")
-	@RequestMapping(value = "/updateLogin", method = RequestMethod.PUT, headers = "Accept=application/json")
+	@RequestMapping(value = "/updateLogin", method = RequestMethod.PUT, headers = "Accept=application/json", produces = "application/json")
 	public ResponseFormatter<RespLoginDTO> updateLogin(@RequestBody ReqLoginDTO request) throws AredviException{
 		if(null == request || request.getPassword() == null || request.getUserName()==null){
 			 throw new InvalidRequestException("Credentials are missing.");
@@ -65,7 +67,7 @@ public class UserController extends AredviController{
 		return resp;
 	}
 
-	@RequestMapping(value = "/addprofile", method = RequestMethod.PUT, headers = "Accept=application/json")
+	@RequestMapping(value = "/addprofile", method = RequestMethod.PUT, headers = "Accept=application/json", produces = "application/json")
 	public ResponseFormatter<RespUserProfileDTO> addUserProfile(
 			@RequestBody ReqUserProfileDTO request) throws AredviException {
 		ResponseFormatter<RespUserProfileDTO> resp = new ResponseFormatter<RespUserProfileDTO>();
@@ -78,21 +80,19 @@ public class UserController extends AredviController{
 		if(null != userLogin){
 			 throw new UsernameNotFoundException("User name already exist.");
 		}
-		ReqLoginDTO reqLogin = new ReqLoginDTO();
+		/*ReqLoginDTO reqLogin = new ReqLoginDTO();
 		reqLogin.setUserName(request.getUserName());
 		reqLogin.setConfirmPassword(request.getConfirmPassword());
 		reqLogin.setPassword(request.getPassword());
-		RespLoginDTO respLoginDTO = usrService.createLogin(reqLogin);
-		if(null !=respLoginDTO){
-		request.setUserLoginId(respLoginDTO.getUserLoginId());
+		RespLoginDTO respLoginDTO = usrService.createLogin(reqLogin);*/
+		
 		RespUserProfileDTO respUserProfileDTO = usrService.addUserProfile(request);
 		resp.setResponseData(respUserProfileDTO);
-		}
 		return resp;
 	}
 
 	@Secured("ROLE_USER")
-	@RequestMapping(value = "/updateprofile", method = RequestMethod.PUT, headers = "Accept=application/json")
+	@RequestMapping(value = "/updateprofile", method = RequestMethod.PUT, headers = "Accept=application/json", produces = "application/json")
 	public ResponseFormatter<RespUserProfileDTO> updateUserProfile(
 			@RequestBody RequestFormatter<ReqUserProfileDTO> request) throws AredviException {
 		RespUserProfileDTO respUserProfileDTO = usrService.updateUserProfile(request.getRequestData());
@@ -102,7 +102,7 @@ public class UserController extends AredviController{
 	}
 
 	@Secured("ROLE_USER")
-	@RequestMapping(value = "/findprofile", method = RequestMethod.GET)
+	@RequestMapping(value = "/findprofile", method = RequestMethod.GET, produces = "application/json")
 	public ResponseFormatter<RespUserProfileDTO> getUserProfile(@RequestParam int usrId) throws AredviException {
 		RespUserProfileDTO respUserProfileDTO = usrService.getUserProfile(usrId);
 		ResponseFormatter<RespUserProfileDTO> resp = new ResponseFormatter<RespUserProfileDTO>();
@@ -111,7 +111,7 @@ public class UserController extends AredviController{
 	}
 
 	@Secured("ROLE_USER")
-	@RequestMapping(value = "/searchbyname", method = RequestMethod.GET)
+	@RequestMapping(value = "/searchbyname", method = RequestMethod.GET, produces = "application/json")
 	public ResponseFormatter<List<RespUserProfileDTO>> searchUserByName(@RequestParam String name)
 			throws AredviException {
 		List<RespUserProfileDTO> profiles = usrService.searchUserByName(name);
@@ -121,7 +121,7 @@ public class UserController extends AredviController{
 	}
 
 	@Secured("ROLE_USER")
-	@RequestMapping(value = "/searchbytype", method = RequestMethod.GET)
+	@RequestMapping(value = "/searchbytype", method = RequestMethod.GET, produces = "application/json")
 	public ResponseFormatter<List<RespUserProfileDTO>> searchUserByType(@RequestParam String type)
 			throws AredviException {
 		List<RespUserProfileDTO> profiles = usrService.searchUserByType(type);

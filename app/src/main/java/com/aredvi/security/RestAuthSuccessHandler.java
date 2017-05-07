@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
@@ -19,6 +18,7 @@ import org.springframework.util.StringUtils;
 
 import com.aredvi.dao.interfaces.UserLoginDAO;
 import com.aredvi.exceptions.AredviException;
+import com.aredvi.sqlentity.User;
 import com.aredvi.sqlentity.UserLogin;
 
 

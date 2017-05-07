@@ -3,13 +3,13 @@ package com.aredvi.dto;
 import java.io.Serializable;
 
 public class AddressDTO implements Serializable {
-	private static final long serialVersionUID = 2265618344750840030L;
-	private int addId;
-	private String address;
-	private String lat;
-	private String lng;
-	private int userID;
-	private String pinCode;
+	 static final long serialVersionUID = 2265618344750840030L;
+	 int addId;
+	 String address;
+	 String lat;
+	 String lng;
+	 int userID;
+	 String pinCode;
 	
 	public int getAddId() {
 		return addId;
@@ -50,6 +50,18 @@ public class AddressDTO implements Serializable {
 	}
 	public void setUserID(int userID) {
 		this.userID = userID;
+	}
+	public AddressDTO(int addId, String address, String lat, String lng, int userID, String pinCode) {
+		super();
+		this.addId = addId;
+		this.address = address;
+		this.lat = lat;
+		this.lng = lng;
+		this.userID = userID;
+		this.pinCode = pinCode;
+	}
+	public AddressDTO(){
+		
 	}
 	
 }
